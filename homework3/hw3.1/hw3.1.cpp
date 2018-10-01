@@ -3,14 +3,14 @@
 #include <algorithm>
 
 
-int insertionSort(int *insSourceArray, int insSourceArrayLength)
+int insertionSort(int *insSourceArray, int insLeftBorder, int insRightBorder)
 {
-	for (int i = 1; i < insSourceArrayLength; ++i)
+	for (int i = insLeftBorder; i < insRightBorder; ++i)
 	{
 		const int key = insSourceArray[i];
 		int counter = i;
 
-		while ((counter >= 0) && (key < insSourceArray[counter - 1]))
+		while ((counter >= insLeftBorder) && (key < insSourceArray[counter - 1]))
 		{
 				std::swap(insSourceArray[counter - 1], insSourceArray[counter]);
 				--counter;
@@ -20,34 +20,61 @@ int insertionSort(int *insSourceArray, int insSourceArrayLength)
 	return 0;
 }
 
-int arrayPartition(int *unpartedArray, int leftBorder, int rightBorder)
+int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
 {
-	const int pivot = unpartedArray[leftBorder];
-	int position = leftBorder + 1;
+	const int pivot = partitionArray[partLeftBorder];
+	int position = partLeftBorder + 1;
 
-	for (int i = leftBorder + 1; i < rightBorder; ++i)
+	for (int i = partLeftBorder + 1; i < partRightBorder; ++i)
 	{
-		if (unpartedArray[i] < pivot)
+		if (partitionArray[i] < pivot)
 		{
-			std::swap(unpartedArray[i], unpartedArray[position]);
+			std::swap(partitionArray[i], partitionArray[position]);
 			++position;
 		}
 	}
 
-	std::swap(unpartedArray[leftBorder], unpartedArray[position - 1]);
-	return 0;
+	std::swap(partitionArray[partLeftBorder], partitionArray[position - 1]);
+	return partitionArray[position - 1];
 }
 
-int quickSort(int *)
+int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
+{
+	if ((sortRightBorder - sortLeftBorder + 1) < 10)
+	{
+		insertionSort(qsSourceArray, sortLeftBorder, sortRightBorder);
+		return 0;
+	}
+
+	int divisor = arrayPartition(qsSourceArray, sortLeftBorder, sortRightBorder);
+	quickSort(qsSourceArray, sortLeftBorder, divisor - 1);
+	quickSort(qsSourceArray, divisor, sortRightBorder);
+
+	return 0;
+} 
 
 int main()
 {
-	int testArray[]{ 5, 7, 1, 0, 45, -6, 10 };
-	arrayPartition(testArray, 0, 7);
-	for (int i = 0; i < 7; ++i)
+	int arrayLength = 0;
+	printf("Enter the length of the array: ");
+	scanf("%d", &arrayLength);
+
+	int *sourceArray = new int[arrayLength];
+
+	printf("Enter %d elements of the array: ", arrayLength);
+
+	for (int i = 0; i < arrayLength; ++i)
 	{
-		printf("%d ", testArray[i]);
+		scanf("%d", &sourceArray[i]);
 	}
 
+	quickSort(sourceArray, 0, arrayLength);
+
+	for (int i = 0; i < arrayLength; ++i)
+	{
+		printf("%d ", sourceArray[i]);
+	}
+
+	delete[] sourceArray;
 	return 0;
 }
