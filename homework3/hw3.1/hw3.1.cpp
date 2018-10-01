@@ -5,18 +5,20 @@
 
 int insertionSort(int *sourceArray, int sourceArrayLen)
 {
-	for (int i = 0; i < sourceArrayLen; ++i)
+	for (int i = 1; i < sourceArrayLen; ++i)
 	{
-		int current = sourceArray[i];
-
-		for (int counter = i; sourceArray[i] < sourceArray[counter]; --i)
+		const int key = sourceArray[i];
+	
+		for (int counter = i; counter >= 0; --counter)
 		{
-			std::swap(sourceArray[i], sourceArray[counter]);
-			--i;
+			if (key < sourceArray[counter - 1])
+			{
+				std::swap(sourceArray[counter - 1], sourceArray[counter]);
+			}
 		}
-
-		return 0;
 	}
+
+	return 0;
 }
 
 int main()
