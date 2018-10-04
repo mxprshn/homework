@@ -37,7 +37,7 @@ bool programTest()
 {
 	srand(time(0));
 	int testArrayLength = rand() % 30 + 5;
-	int *testArray = new int[testArrayLength];
+	int *testArray = new int[testArrayLength]{0};
 	int mostFrequentTest = rand();
 
 	for (int i = 0; i < testArrayLength; ++i)
@@ -84,7 +84,7 @@ int main()
 	printf("Enter the length of the array: ");
 	scanf("%d", &arrayLength);
 
-	int *sourceArray = new int[arrayLength] {0};
+	int *sourceArray = new int[arrayLength]{0};
 
 	printf("Enter %d elements of the array: ", arrayLength);
 	for (int i = 0; i < arrayLength; ++i)
