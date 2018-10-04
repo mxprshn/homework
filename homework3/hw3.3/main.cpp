@@ -6,6 +6,33 @@
 
 int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
 
+int frequencySearch(int *sortedArray, int sortedArrayLength)
+{
+	int counter = 1;
+	int maximum = 0;
+	int mostFrequent = sortedArray[0];
+
+	for (int i = 1; i < sortedArrayLength; ++i)
+	{
+		if (sortedArray[i] == sortedArray[i - 1])
+		{
+			++counter;
+		}
+		else
+		{
+			counter = 1;
+		}
+
+		if (counter > maximum)
+		{
+			maximum = counter;
+			mostFrequent = sortedArray[i - 1];
+		}
+	}
+
+	return mostFrequent;
+}
+
 int main()
 {
 	int arrayLength = 0;
@@ -22,32 +49,8 @@ int main()
 
 	quickSort(sourceArray, 0, arrayLength - 1);
 
-	int counter = 0;
-	int maximum = 0;
-	int mostFrequent = sourceArray[0];
+	printf("The most frequent element of array is %d. ", frequencySearch(sourceArray, arrayLength));
 
-	for (int i = 1; i < arrayLength; ++i)
-	{
-		if (sourceArray[i] == sourceArray[i - 1])
-		{
-			++counter;
-		}
-		else
-		{
-			if (counter > maximum) 
-			{
-				mostFrequent = sourceArray[i - 1];
-				maximum = counter;
-				counter = 0;
-			}
-		}
-	}
-
-	if (counter > maximum)
-	{
-		mostFrequent = sourceArray[arrayLength - 1];
-	}
-
-	printf("%d ", mostFrequent);
+	delete[] sourceArray;
 	return 0;
 }
