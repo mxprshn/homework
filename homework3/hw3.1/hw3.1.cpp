@@ -87,7 +87,7 @@ bool programTest()
 
 int main()
 {
-	if (programTest)
+	if (programTest())
 	{
 		printf("Test completed.\n");
 	}
@@ -111,6 +111,8 @@ int main()
 	}
 	
 	quickSort(sourceArray, 0, arrayLength - 1);
+
+	printf("Sorted array: ");
 
 	for (int i = 0; i < arrayLength; ++i)
 	{
