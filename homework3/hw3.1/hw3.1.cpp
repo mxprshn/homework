@@ -101,7 +101,7 @@ int main()
 	printf("Enter the length of the array: ");
 	scanf("%d", &arrayLength);
 
-	int *sourceArray = new int[arrayLength];
+	int *sourceArray = new int[arrayLength]{0};
 
 	printf("Enter %d elements of the array: ", arrayLength);
 
