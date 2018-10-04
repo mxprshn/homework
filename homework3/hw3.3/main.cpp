@@ -33,8 +33,53 @@ int frequencySearch(int *sortedArray, int sortedArrayLength)
 	return mostFrequent;
 }
 
+bool programTest()
+{
+	srand(time(0));
+	int testArrayLength = rand() % 30 + 5;
+	int *testArray = new int[testArrayLength];
+	int mostFrequentTest = rand();
+
+	for (int i = 0; i < testArrayLength; ++i)
+	{
+		if ((i == 0) || ((i % 2) != 0))
+		{
+			testArray[i] = mostFrequentTest;
+		}
+		else
+		{
+			testArray[i] = rand();
+		}
+	}
+		
+	quickSort(testArray, 0, testArrayLength - 1);
+
+	if (frequencySearch(testArray, testArrayLength) != mostFrequentTest)
+	{
+		delete[] testArray;
+		return false;
+	}
+	else
+	{
+		delete[] testArray;
+		return true;
+	}
+ 
+}
+
 int main()
 {
+	if (programTest())
+	{
+		printf("Test completed.\n");
+	}
+	else
+	{
+		printf("Test not completed.\n");
+		return 0;
+	}
+
+
 	int arrayLength = 0;
 	printf("Enter the length of the array: ");
 	scanf("%d", &arrayLength);
