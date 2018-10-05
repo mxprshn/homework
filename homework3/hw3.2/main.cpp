@@ -1,12 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <algorithm>
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
+int quickSort(long *qsSourceArray, int sortLeftBorder, int sortRightBorder);
 
-int binarySearch(int *sortedArray, int sortedArrayLength, int searchElement)
+int binarySearch(long *sortedArray, int sortedArrayLength, int searchElement)
 {
 	int leftBorder = 0;
 	int rightBorder = sortedArrayLength - 1;
@@ -43,13 +42,26 @@ int main()
 	printf("Enter 'n' in range 1 <= n <= 5000 and 'k' in range 1 <= k <= 300000: ");
 	scanf("%d%d", &n, &k);
 
-	unsigned long int *sourceArray = new unsigned long int[n]{0};
+	long int *sourceArray = new long int[n]{0};
 
 	for (int i = 0; i < n; ++i)
 	{
-		sourceArray[i] = (rand() % 1000) * (rand() % 1000) * (rand() % 1000);
-		printf("%d ", sourceArray[i]);
+		sourceArray[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
 	}
+
+	quickSort(sourceArray, 0, n - 1);
+
+	for (int i = 0; i < k; ++i)
+	{
+		long int matching = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		if (binarySearch(sourceArray, n, matching) != -1)
+		{
+			printf("%d found.\n", matching);
+		}
+	}
+
+	printf("All matches found.\n");
+	
 	delete[] sourceArray;
 	return 0;
 }
