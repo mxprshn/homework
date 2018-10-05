@@ -49,10 +49,11 @@ bool programTest()
 		}
 	}
 
-	testArray[(testArrayLength - 1) / 2] = mustBeFound;
+	testArray[(testArrayLength - 1) / 5] = mustBeFound;
 
-	if (binarySearch(testArray, testArrayLength, mustBeFound) != (testArrayLength - 1) / 2)
+	if (binarySearch(testArray, testArrayLength, mustBeFound) != ((testArrayLength - 1) / 5))
 	{
+		printf("%d", binarySearch(testArray, testArrayLength, mustBeFound));
 		delete[] testArray;
 		return false;
 	}
