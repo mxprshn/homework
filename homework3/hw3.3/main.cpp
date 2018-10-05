@@ -10,6 +10,9 @@ bool programTest()
 	int testArray1[testArray1Length] = {0, 3, -1 , 6, 0, 6, 6, 0, 0, 11};
 	int testArray2[testArray2Length] = {-98, 0, 23, -98, 54, 76, 2, 23, 1, 0};
 
+	quickSort(testArray1, 0, testArray1Length - 1);
+	quickSort(testArray2, 0, testArray2Length - 1);
+
 	if ((frequencySearch(testArray1, testArray1Length) != 0) || (frequencySearch(testArray2, testArray2Length) != -98))
 	{
 		return false;
@@ -42,6 +45,8 @@ int main()
 	{
 		scanf("%d", &sourceArray[i]);
 	}
+
+	quickSort(sourceArray, 0, arrayLength - 1);
 
 	printf("The most frequent element of array is %d. ", frequencySearch(sourceArray, arrayLength));
 

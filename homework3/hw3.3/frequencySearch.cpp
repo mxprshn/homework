@@ -42,8 +42,6 @@ int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
 
 int frequencySearch(int *searchingArray, int searchingArrayLength)
 {
-	quickSort(searchingArray, 0, searchingArrayLength - 1);
-
 	int counter = 1;
 	int maximum = 0;
 	int mostFrequent = searchingArray[0];
