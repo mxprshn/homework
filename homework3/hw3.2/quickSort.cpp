@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <algorithm>
 
-int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
+int arrayPartition(long *partitionArray, int partLeftBorder, int partRightBorder)
 {
 	const int pivot = partitionArray[partLeftBorder];
 	int position = partLeftBorder + 1;
@@ -20,7 +20,7 @@ int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
 	return position - 1;
 }
 
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
+int quickSort(long *qsSourceArray, int sortLeftBorder, int sortRightBorder)
 {
 	if (sortRightBorder < sortLeftBorder)
 	{
