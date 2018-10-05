@@ -1,70 +1,29 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "search.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
-int quickSort(long *qsSourceArray, int sortLeftBorder, int sortRightBorder);
-
-int binarySearch(long *sortedArray, int sortedArrayLength, int searchElement)
-{
-	int leftBorder = 0;
-	int rightBorder = sortedArrayLength - 1;
-
-	while (leftBorder <= rightBorder)
-	{
-		int middle = ((leftBorder + rightBorder) / 2);
-
-		if (sortedArray[middle] == searchElement)
-		{
-			return middle;
-		}
-
-		if (searchElement > sortedArray[middle])
-		{
-			leftBorder = middle + 1;
-		}
-		else
-		{
-			rightBorder = middle - 1;
-		}
-	}
-
-	return -1;
-}
-
 bool programTest()
 {
-	int testArrayLength = rand() % 5000 + 1;
-	long int *testArray = new long int[testArrayLength]{0};
+	const int testArrayLength = 10;
+	const long int mustBeFound = 146;
+	const long int mustNotBeFound = 275;
 
-	long int mustBeFound = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
-	long int mustNotBeFound = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+	long int testArray[testArrayLength] = {43, -4, 12, 0, 0, 3, 146, 3, -14, 18};
 
-	for (int i = 0; i < testArrayLength; ++i)
+	quickSort(testArray, 0, testArrayLength - 1);
+
+	if (binarySearch(testArray, testArrayLength, mustBeFound) == 1)
 	{
-		testArray[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
-		while (testArray[i] == mustNotBeFound)
-		{
-			testArray[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
-		}
-	}
-
-	testArray[(testArrayLength - 1) / 5] = mustBeFound;
-
-	if (binarySearch(testArray, testArrayLength, mustBeFound) != ((testArrayLength - 1) / 5))
-	{
-		printf("%d", binarySearch(testArray, testArrayLength, mustBeFound));
-		delete[] testArray;
 		return false;
 	}
 
 	if (binarySearch(testArray, testArrayLength, mustNotBeFound) != -1)
 	{
-		delete[] testArray;
 		return false;
 	}
 
-	delete[] testArray;
 	return true;
 }
 
@@ -96,7 +55,7 @@ int main()
 	}
 
 	quickSort(sourceArray, 0, n - 1);
-
+	
 	for (int i = 0; i < k; ++i)
 	{
 		long int matching = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
