@@ -1,69 +1,21 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
-
-int frequencySearch(int *sortedArray, int sortedArrayLength)
-{
-	int counter = 1;
-	int maximum = 0;
-	int mostFrequent = sortedArray[0];
-
-	for (int i = 1; i < sortedArrayLength; ++i)
-	{
-		if (sortedArray[i] == sortedArray[i - 1])
-		{
-			++counter;
-		}
-		else
-		{
-			counter = 1;
-		}
-
-		if (counter > maximum)
-		{
-			maximum = counter;
-			mostFrequent = sortedArray[i - 1];
-		}
-	}
-
-	return mostFrequent;
-}
+#include "frequencySearch.h"
 
 bool programTest()
 {
-	srand(time(0));
-	int testArrayLength = rand() % 30 + 5;
-	int *testArray = new int[testArrayLength]{0};
-	int mostFrequentTest = rand();
+	const int testArray1Length = 10;
+	const int testArray2Length = 10;
 
-	for (int i = 0; i < testArrayLength; ++i)
-	{
-		if ((i == 0) || ((i % 2) != 0))
-		{
-			testArray[i] = mostFrequentTest;
-		}
-		else
-		{
-			testArray[i] = rand();
-		}
-	}
-		
-	quickSort(testArray, 0, testArrayLength - 1);
+	int testArray1[testArray1Length] = {0, 3, -1 , 6, 0, 6, 6, 0, 0, 11};
+	int testArray2[testArray2Length] = {-98, 0, 23, -98, 54, 76, 2, 23, 1, 0};
 
-	if (frequencySearch(testArray, testArrayLength) != mostFrequentTest)
+	if ((frequencySearch(testArray1, testArray1Length) != 0) || (frequencySearch(testArray2, testArray2Length) != -98))
 	{
-		delete[] testArray;
 		return false;
 	}
-	else
-	{
-		delete[] testArray;
-		return true;
-	}
- 
+
+	return true;
 }
 
 int main()
@@ -90,8 +42,6 @@ int main()
 	{
 		scanf("%d", &sourceArray[i]);
 	}
-
-	quickSort(sourceArray, 0, arrayLength - 1);
 
 	printf("The most frequent element of array is %d. ", frequencySearch(sourceArray, arrayLength));
 
