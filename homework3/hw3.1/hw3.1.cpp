@@ -1,89 +1,38 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "quickSort.h"
 #include <stdio.h>
-#include <algorithm>
-#include <stdlib.h>
-#include <time.h>
 
-
-void insertionSort(int *insSourceArray, int insLeftBorder, int insRightBorder)
-{
-	for (int i = insLeftBorder; i <= insRightBorder; ++i)
-	{
-		const int key = insSourceArray[i];
-		int counter = i;
-
-		while ((counter > insLeftBorder) && (key < insSourceArray[counter - 1]))
-		{
-				std::swap(insSourceArray[counter - 1], insSourceArray[counter]);
-				--counter;
-		}
-	}
-}
-
-int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
-{
-	const int pivot = partitionArray[partLeftBorder];
-	int position = partLeftBorder + 1;
-
-	for (int i = partLeftBorder + 1; i <= partRightBorder; ++i)
-	{
-		if (partitionArray[i] < pivot)
-		{
-			std::swap(partitionArray[i], partitionArray[position]);
-			++position;
-		}
-	}
-
-	std::swap(partitionArray[partLeftBorder], partitionArray[position - 1]);
-		
-	return position - 1;
-}
-
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
-{
-	if ((sortRightBorder - sortLeftBorder + 1) < 10)
-	{
-		insertionSort(qsSourceArray, sortLeftBorder, sortRightBorder);
-		return 0;
-	}
-
-	int divisor = arrayPartition(qsSourceArray, sortLeftBorder, sortRightBorder);
-	quickSort(qsSourceArray, sortLeftBorder, divisor - 1);
-	quickSort(qsSourceArray, divisor + 1, sortRightBorder);
-
-	return 0;
-} 
 
 bool programTest()
 {
-	srand(time(0));
-	const int testArrayLength = rand() % 30 + 10;
-	int *testArray1 = new int[testArrayLength]{0};
-	int *testArray2 = new int[testArrayLength]{0};
+	int const testArray1Length = 10;
+	int const testArray2Length = 10;
 
-	for (int i = 0; i < testArrayLength; ++i)
+	int testArray1[testArray1Length] = {-9, 8, 122, -100, 122, 0, 3, 10, -15, -2};
+	int testArray2[testArray2Length] = {-10, -5, -1, 0, 0, 5, 15, 31, 100, 101};
+
+	quickSort(testArray1, 0, testArray1Length - 1);
+	quickSort(testArray2, 0, testArray2Length - 1);
+
+	for (int i = 0; i < testArray1Length - 1; ++i)
 	{
-		testArray1[i] = rand();
-		testArray2[i] = testArray1[i];
-	}
-
-	quickSort(testArray1, 0, testArrayLength - 1);
-	insertionSort(testArray2, 0, testArrayLength - 1);
-
-	for (int i = 1; i < testArrayLength; ++i)
-	{
-		if ((testArray1[i] != testArray2[i]) || (testArray1[i] < testArray1[i - 1]))
+		if (testArray1[i + 1] < testArray1[i])
 		{
-			delete[] testArray1;
-			delete[] testArray2;
 			return false;
 		}
 	}
 
-	delete[] testArray1;
-	delete[] testArray2;
+	for (int i = 0; i < testArray2Length - 1; ++i)
+	{
+		if (testArray2[i + 1] < testArray2[i])
+		{
+			return false;
+		}
+	}
+
 	return true;
 }
+
 
 int main()
 {
