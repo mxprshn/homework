@@ -32,9 +32,54 @@ int binarySearch(long *sortedArray, int sortedArrayLength, int searchElement)
 	return -1;
 }
 
+bool programTest()
+{
+	int testArrayLength = rand() % 5000 + 1;
+	long int *testArray = new long int[testArrayLength]{0};
+
+	long int mustBeFound = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+	long int mustNotBeFound = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+
+	for (int i = 0; i < testArrayLength; ++i)
+	{
+		testArray[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		while (testArray[i] == mustNotBeFound)
+		{
+			testArray[i] = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+		}
+	}
+
+	testArray[(testArrayLength - 1) / 2] = mustBeFound;
+
+	if (binarySearch(testArray, testArrayLength, mustBeFound) != (testArrayLength - 1) / 2)
+	{
+		delete[] testArray;
+		return false;
+	}
+
+	if (binarySearch(testArray, testArrayLength, mustNotBeFound) != -1)
+	{
+		delete[] testArray;
+		return false;
+	}
+
+	delete[] testArray;
+	return true;
+}
+
 int main()
 {
 	srand(time(0));
+
+	if (programTest())
+	{
+		printf("Test completed.\n");
+	}
+	else
+	{
+		printf("Test not completed.\n");
+		return 0;
+	}
 
 	int n = 0;
 	long int k = 0;
@@ -54,6 +99,7 @@ int main()
 	for (int i = 0; i < k; ++i)
 	{
 		long int matching = (rand() % 1000 + 1) * (rand() % 1000 + 1) * (rand() % 1000 + 1);
+
 		if (binarySearch(sourceArray, n, matching) != -1)
 		{
 			printf("%d found.\n", matching);
