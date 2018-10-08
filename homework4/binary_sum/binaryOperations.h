@@ -1,5 +1,6 @@
 #pragma once
 
 int const bitNumberLength = 32;
-void createBinary(int decimal, short int *binary);
-void printBinary(short int *binary);
+void createBinary(int decimal, bool *binary);
+void printBinary(bool *binary);
+void sumBinary(bool *summand1, bool *summand2, bool *result);

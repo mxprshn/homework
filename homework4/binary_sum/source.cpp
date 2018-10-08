@@ -1,8 +1,7 @@
-#include <limits.h>
 #include <stdio.h>
 #include "binaryOperations.h"
 
-void createBinary(int decimal, short int *binary)
+void createBinary(int decimal, bool *binary)
 {
 	unsigned int bit = 0b10000000000000000000000000000000;
 	if (decimal >= 0)
@@ -21,10 +20,15 @@ void createBinary(int decimal, short int *binary)
 			binary[i] = ((decimal & bit) ? 0 : 1);
 			bit = bit >> 1;
 		}
+
+		bool binaryOne[bitNumberLength]{0};
+		binaryOne[bitNumberLength - 1] = 1;
+
+		sumBinary(binary, binaryOne, binary);
 	}
 }
 
-void printBinary(short int *binary)
+void printBinary(bool *binary)
 {
 	for (int i = 0; i < bitNumberLength; ++i)
 	{
@@ -34,20 +38,40 @@ void printBinary(short int *binary)
 	printf("\n");
 }
 
-short int sum(short int *summand1, short int *summand2, short int *result)
+void sumBinary(bool *summand1, bool *summand2, bool *result)
 {
+	short int shift = 0;
 	for (int i = bitNumberLength - 1; i >= 0; --i)
 	{
-		result[i] = summand1[i] + summand2[i];
-		if ((result[i] > 1) && (i > 0))
+		switch (summand1[i] + summand2[i] + shift)
 		{
-			result[i] = 1;
-			++result[i - 1];
-		}
-		else if (result[i] > 1)
-		{
+			case 3:
+			{
+				shift = 1;
+				result[i] = 1;
+				break;
+			}
 
-		}
+			case 2:
+			{
+				shift = 1;
+				result[i] = 0;
+				break;
+			}
+
+			case 1:
+			{
+				shift = 0;
+				result[i] = 1;
+				break;
+			}
+
+			default:
+			{
+				shift = 0;
+				result[i] = 0;
+				break;
+			}
+		}				
 	}
-	return 0;
 }
