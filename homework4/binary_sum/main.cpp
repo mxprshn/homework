@@ -31,6 +31,9 @@ int main()
 
 	printBinary(sum);
 
+	printf("Сумма чисел в десятичной системе:   ");
+	printf("%d", createDecimal(sum));
+
 
 	return 0;
 }

@@ -3,10 +3,10 @@
 
 void createBinary(int decimal, bool *binary)
 {
-	unsigned int bit = 0b10000000000000000000000000000000;
+	unsigned int bit = 0b1000000000000000000000000000000;
 	if (decimal >= 0)
 	{
-		for (int i = 0; i < bitNumberLength; ++i)
+		for (int i = 1; i < bitNumberLength; ++i)
 		{
 			binary[i] = ((decimal & bit) ? 1 : 0);
 			bit = bit >> 1;
@@ -15,7 +15,8 @@ void createBinary(int decimal, bool *binary)
 	else
 	{
 		decimal *= -1;
-		for (int i = 0; i < bitNumberLength; ++i)
+		binary[0] = 1;
+		for (int i = 1; i < bitNumberLength; ++i)
 		{
 			binary[i] = ((decimal & bit) ? 0 : 1);
 			bit = bit >> 1;
@@ -74,4 +75,40 @@ void sumBinary(bool *summand1, bool *summand2, bool *result)
 			}
 		}				
 	}
+}
+
+int createDecimal(bool *binary)
+{
+	int decimal = 0;
+	int degreeOfTwo = 1;
+
+	if (binary[0])
+	{
+		for (int i = 31; i > 1; --i)
+		{
+			if (!binary[i])
+			{
+				decimal += degreeOfTwo;
+			}
+
+			degreeOfTwo *= 2;
+		}
+
+		decimal *= -1;
+		decimal -= 1;
+	}
+	else
+	{
+		for (int i = 31; i > 1; --i)
+		{
+			if (binary[i])
+			{
+				decimal += degreeOfTwo;
+			}
+
+			degreeOfTwo *= 2;
+		}
+	}
+	
+	return decimal;
 }
