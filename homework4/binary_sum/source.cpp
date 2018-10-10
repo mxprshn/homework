@@ -1,31 +1,16 @@
 #include <stdio.h>
 #include "binaryOperations.h"
 
-void createBinary(int decimal, bool *binary)
+void createBinary(int fromDecimal, bool *toBinary)
 {
-	unsigned int bit = 0b1000000000000000000000000000000;
-	if (decimal >= 0)
-	{
-		for (int i = 1; i < bitNumberLength; ++i)
-		{
-			binary[i] = ((decimal & bit) ? 1 : 0);
-			bit = bit >> 1;
-		}
-	}
-	else
-	{
-		decimal *= -1;
-		binary[0] = 1;
-		for (int i = 1; i < bitNumberLength; ++i)
-		{
-			binary[i] = ((decimal & bit) ? 0 : 1);
-			bit = bit >> 1;
-		}
+	unsigned int bit = 0b01000000000000000000000000000000;
 
-		bool binaryOne[bitNumberLength]{0};
-		binaryOne[bitNumberLength - 1] = 1;
+	toBinary[0] = (fromDecimal < 0);
 
-		sumBinary(binary, binaryOne, binary);
+	for (int i = 1; i < bitNumberLength; ++i)
+	{
+		toBinary[i] = (fromDecimal & bit);
+		bit = bit >> 1;
 	}
 }
 
