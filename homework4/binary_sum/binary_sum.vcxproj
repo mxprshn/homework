@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binaryOperations.h" />

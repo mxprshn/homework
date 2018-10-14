@@ -26,7 +26,7 @@ void printBinary(bool *binary)
 
 void sumBinary(bool *summand1, bool *summand2, bool *result)
 {
-	short int shift = 0;
+	bool shift = 0;
 	for (int i = bitNumberLength - 1; i >= 0; --i)
 	{
 		switch (summand1[i] + summand2[i] + shift)
@@ -67,33 +67,20 @@ int createDecimal(bool *binary)
 	int decimal = 0;
 	int degreeOfTwo = 1;
 
+	for (int i = bitNumberLength - 1; i > 1; --i)
+	{
+		if (binary[i] ^ binary[0])
+		{
+			decimal += degreeOfTwo;
+		}
+			degreeOfTwo *= 2;
+	}
+
 	if (binary[0])
 	{
-		for (int i = 31; i > 1; --i)
-		{
-			if (!binary[i])
-			{
-				decimal += degreeOfTwo;
-			}
-
-			degreeOfTwo *= 2;
-		}
-
 		decimal *= -1;
 		decimal -= 1;
 	}
-	else
-	{
-		for (int i = 31; i > 1; --i)
-		{
-			if (binary[i])
-			{
-				decimal += degreeOfTwo;
-			}
-
-			degreeOfTwo *= 2;
-		}
-	}
-	
+			
 	return decimal;
 }

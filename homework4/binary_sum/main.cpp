@@ -3,11 +3,23 @@
 #include <stdio.h>
 #include "binaryOperations.h"
 
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 
+	if (programTest())
+	{
+		printf("Тест пройден.\n");
+	}
+	else
+	{
+		printf("Тест не пройден.\n");
+		return 1;
+	}
+
 	printf("Введите целые числа для двоичного суммирования: ");
+
 	int decimal1 = 0;
 	int decimal2 = 0;
 
