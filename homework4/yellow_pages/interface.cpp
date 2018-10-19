@@ -3,7 +3,7 @@
 #include "phonebook.h"
 
 
-void interface(int recordAmount, record *currentBase)
+int interface(int recordAmount, record *currentBase)
 {
 	printf("Phonebook by mxprshn. 2018. All rights reserved.\n\n");
 	printf("Command list:\n");
@@ -77,16 +77,18 @@ void interface(int recordAmount, record *currentBase)
 
 		case 0:
 		{
-			printf("Exiting programm...");
+			printf("Exiting program...");
 			break;
 		}
 
 		default:
 		{
-			break;
+			return 1;
 		}
 
 		}
 	}
+
+	return 0;
 }
 

@@ -3,9 +3,9 @@
 #include <string.h>
 #include "phonebook.h"
 
-int readFile(record *currentBase)
+int readFile(record *currentBase, const char *fileName)
 {
-	FILE *baseFile = fopen("base.txt", "r");
+	FILE *baseFile = fopen(fileName, "r");
 	int recordNumber = 0;
 	
 	if (!baseFile)
@@ -47,11 +47,6 @@ int createRecord(int recordAmount, record *currentBase)
 	fgets(currentBase[recordAmount].number, numberLength, stdin);
 	++recordAmount;
 	return recordAmount;
-}
-
-void deleteBase(record *currentBase)
-{
-	delete[] currentBase;
 }
 
 void printBase(int recordAmount, record *currentBase)

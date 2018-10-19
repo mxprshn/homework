@@ -4,9 +4,8 @@
 
 int main()
 {
-	record *base = new record[baseSize]{};
-	interface(readFile(base), base);
-	delete[] base;
+	struct record base[baseSize]{};
+	interface(readFile(base, baseFileName), base);
 	return 0;
 }
 
