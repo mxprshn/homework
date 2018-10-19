@@ -31,6 +31,7 @@ int main()
 
 	createBinary(decimal1, binary1);
 	createBinary(decimal2, binary2);
+	sumBinary(binary1, binary2, sum);
 
 	printf("Первое число в дополнительном коде: ");
 	printBinary(binary1);
@@ -39,8 +40,6 @@ int main()
 	printBinary(binary2);
 
 	printf("Сумма чисел в дополнительном коде:  ");
-	sumBinary(binary1, binary2, sum);
-
 	printBinary(sum);
 
 	printf("Сумма чисел в десятичной системе:   ");
