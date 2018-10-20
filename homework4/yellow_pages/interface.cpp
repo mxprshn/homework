@@ -3,7 +3,7 @@
 #include "phonebook.h"
 
 
-int interface(int recordAmount, Record *currentBase)
+int userInterface(int recordAmount, Record *currentBase)
 {
 	printf("Phonebook by mxprshn. 2018. All rights reserved.\n\n");
 	printf("Command list:\n");

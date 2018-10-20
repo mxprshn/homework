@@ -15,7 +15,7 @@ int main()
 	}
 
 	struct Record base[baseSize]{};
-	interface(readFile(base, baseFileName), base);
+	userInterface(readFile(base, baseFileName), base);
 	return 0;
 }
 

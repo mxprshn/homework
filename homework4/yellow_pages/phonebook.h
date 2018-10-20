@@ -14,7 +14,7 @@ struct Record
 
 int readFile(Record *currentBase, const char *fileName);
 void printBase(int recordAmount, Record *currentBase);
-int interface(int recordAmount, Record *currentBase);
+int userInterface(int recordAmount, Record *currentBase);
 int createRecord(int recordAmount, Record *currentBase, char *newName, char *newNumber);
 int writeFile(int writePosition, int recordAmount, Record *currentBase);
 int searchName(int recordAmount, Record *currentBase, char *targetNumber);
