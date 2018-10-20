@@ -4,7 +4,17 @@
 
 int main()
 {
-	struct record base[baseSize]{};
+	if (programTest())
+	{
+		printf("Tests completed.\n");
+	}
+	else
+	{
+		printf("Tests not completed.\n");
+		return 1;
+	}
+
+	struct Record base[baseSize]{};
 	interface(readFile(base, baseFileName), base);
 	return 0;
 }

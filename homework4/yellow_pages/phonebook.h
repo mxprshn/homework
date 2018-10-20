@@ -6,16 +6,17 @@ const int numberLength = 15;
 const char baseFileName[] = "base.txt";
 const char testBaseFileName[] = "test.txt";
 
-struct record
+struct Record
 {
 	char name[nameLength];
 	char number[numberLength];
 };
 
-int readFile(record *currentBase, const char *fileName);
-void printBase(int recordAmount, record *currentBase);
-int interface(int recordAmount, record *currentBase);
-int createRecord(int recordAmount, record *currentBase);
-int writeFile(int writePosition, int recordAmount, record *currentBase);
-int searchName(int recordAmount, record *currentBase);
-int searchNumber(int recordAmount, record *currentBase);
+int readFile(Record *currentBase, const char *fileName);
+void printBase(int recordAmount, Record *currentBase);
+int interface(int recordAmount, Record *currentBase);
+int createRecord(int recordAmount, Record *currentBase, char *newName, char *newNumber);
+int writeFile(int writePosition, int recordAmount, Record *currentBase);
+int searchName(int recordAmount, Record *currentBase, char *targetNumber);
+int searchNumber(int recordAmount, Record *currentBase, char *targetName);
+bool programTest();

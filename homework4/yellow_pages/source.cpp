@@ -3,7 +3,7 @@
 #include <string.h>
 #include "phonebook.h"
 
-int readFile(record *currentBase, const char *fileName)
+int readFile(Record *currentBase, const char *fileName)
 {
 	FILE *baseFile = fopen(fileName, "r");
 	int recordNumber = 0;
@@ -24,7 +24,7 @@ int readFile(record *currentBase, const char *fileName)
 	return recordNumber - 1;
 }
 
-int writeFile(int writePosition, int recordAmount, record *currentBase)
+int writeFile(int writePosition, int recordAmount, Record *currentBase)
 {
 	FILE *baseFile = fopen("base.txt", "a+");
 
@@ -38,18 +38,15 @@ int writeFile(int writePosition, int recordAmount, record *currentBase)
 	return recordAmount;
 }
 
-int createRecord(int recordAmount, record *currentBase)
+int createRecord(int recordAmount, Record *currentBase, char *newName, char *newNumber)
 {
-	printf("Enter name: ");
-	getc(stdin); // to skip the \n symbol after commandCode input
-	fgets(currentBase[recordAmount].name, nameLength, stdin);
-	printf("Enter number: ");
-	fgets(currentBase[recordAmount].number, numberLength, stdin);
+	strcpy(currentBase[recordAmount].name, newName);
+	strcpy(currentBase[recordAmount].number, newNumber);
 	++recordAmount;
 	return recordAmount;
 }
 
-void printBase(int recordAmount, record *currentBase)
+void printBase(int recordAmount, Record *currentBase)
 {
 	for (int i = 0; i < recordAmount; ++i)
 	{
@@ -58,13 +55,8 @@ void printBase(int recordAmount, record *currentBase)
 	}
 }
 
-int searchName(int recordAmount, record *currentBase)
-{
-	char targetNumber[numberLength]{};
-	printf("Enter the number to find the name: ");
-	getc(stdin); // to skip the \n symbol after commandCode input
-	fgets(targetNumber, numberLength, stdin);
-
+int searchName(int recordAmount, Record *currentBase, char *targetNumber)
+{	
 	for (int i = 0; i < recordAmount; ++i)
 	{
 		if (strcmp(currentBase[i].number, targetNumber) == 0)
@@ -76,13 +68,8 @@ int searchName(int recordAmount, record *currentBase)
 	return -1;
 }
 
-int searchNumber(int recordAmount, record *currentBase)
-{
-	char targetName[nameLength]{};
-	printf("Enter the name to find the number: ");
-	getc(stdin); // to skip the \n symbol after commandCode input
-	fgets(targetName, nameLength, stdin);
-
+int searchNumber(int recordAmount, Record *currentBase, char *targetName)
+{	
 	for (int i = 0; i < recordAmount; ++i)
 	{
 		if (strcmp(currentBase[i].name, targetName) == 0)

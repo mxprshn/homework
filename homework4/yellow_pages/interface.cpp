@@ -3,7 +3,7 @@
 #include "phonebook.h"
 
 
-int interface(int recordAmount, record *currentBase)
+int interface(int recordAmount, Record *currentBase)
 {
 	printf("Phonebook by mxprshn. 2018. All rights reserved.\n\n");
 	printf("Command list:\n");
@@ -22,24 +22,32 @@ int interface(int recordAmount, record *currentBase)
 		printf("\nEnter the command: ");
 		scanf("%d", &commandCode);
 
-		switch (commandCode)
+		if (commandCode == 1)
 		{
+			char newName[nameLength];
+			char newNumber[numberLength];
+			printf("Enter name: ");
+			getc(stdin); // to skip the \n symbol after commandCode input
+			fgets(newName, nameLength, stdin);
+			printf("Enter number: ");
+			fgets(newNumber, numberLength, stdin);
 
-		case 1:
-		{
-			recordAmount = createRecord(recordAmount, currentBase);
-			break;
+			recordAmount = createRecord(recordAmount, currentBase, newName, newNumber);
 		}
 
-		case 2:
+		else if (commandCode == 2)
 		{
 			printBase(recordAmount, currentBase);
-			break;
 		}
 
-		case 3:
+		else if (commandCode == 3)
 		{
-			const int foundPosition = searchNumber(recordAmount, currentBase);
+			char targetName[nameLength]{};
+			printf("Enter a name to find the number: ");
+			getc(stdin); // to skip the \n symbol after commandCode input
+			fgets(targetName, nameLength, stdin);
+
+			const int foundPosition = searchNumber(recordAmount, currentBase, targetName);
 
 			if (foundPosition >= 0)
 			{
@@ -49,13 +57,16 @@ int interface(int recordAmount, record *currentBase)
 			{
 				printf("Name not found.\n");
 			}
-
-			break;
 		}
 
-		case 4:
+		else if (commandCode == 4)
 		{
-			const int foundPosition = searchName(recordAmount, currentBase);
+			char targetNumber[numberLength]{};
+			printf("Enter a number to find the name: ");
+			getc(stdin); // to skip the \n symbol after commandCode input
+			fgets(targetNumber, numberLength, stdin);
+
+			const int foundPosition = searchName(recordAmount, currentBase, targetNumber);
 
 			if (foundPosition >= 0)
 			{
@@ -65,30 +76,26 @@ int interface(int recordAmount, record *currentBase)
 			{
 				printf("Number not found.\n");
 			}
-
-			break;
 		}
 
-		case 5:
+		else if (commandCode == 5)
 		{
 			writePosition = writeFile(writePosition, recordAmount, currentBase);
-			break;
 		}
 
-		case 0:
+		else if (commandCode == 0)
 		{
 			printf("Exiting program...");
-			break;
 		}
 
-		default:
+		else
 		{
 			return 1;
-		}
-
 		}
 	}
 
 	return 0;
 }
+
+
 
