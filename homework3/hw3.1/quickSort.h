@@ -1,3 +1,4 @@
 #pragma once
 
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
+void quickSort(int *sourceArray, int leftBorder, int rightBorder);
+bool programTest();

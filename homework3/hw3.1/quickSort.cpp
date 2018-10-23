@@ -7,51 +7,50 @@ void swap(int *element1, int *element2)
 	*element2 = buffer;
 }
 
-void insertionSort(int *insSourceArray, int insLeftBorder, int insRightBorder)
+void insertionSort(int *sourceArray, int leftBorder, int rightBorder)
 {
-	for (int i = insLeftBorder; i <= insRightBorder; ++i)
+	for (int i = leftBorder; i <= rightBorder; ++i)
 	{
-		const int key = insSourceArray[i];
+		const int key = sourceArray[i];
 		int counter = i;
 
-		while ((counter > insLeftBorder) && (key < insSourceArray[counter - 1]))
+		while ((counter > leftBorder) && (key < sourceArray[counter - 1]))
 		{
-			swap(&insSourceArray[counter - 1], &insSourceArray[counter]);
+			swap(&sourceArray[counter - 1], &sourceArray[counter]);
 			--counter;
 		}
 	}
 }
 
-int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
+int arrayPartition(int *sourceArray, int leftBorder, int rightBorder)
 {
-	const int pivot = partitionArray[partLeftBorder];
-	int position = partLeftBorder + 1;
+	const int pivot = sourceArray[leftBorder];
+	int position = leftBorder + 1;
 
-	for (int i = partLeftBorder + 1; i <= partRightBorder; ++i)
+	for (int i = leftBorder + 1; i <= rightBorder; ++i)
 	{
-		if (partitionArray[i] < pivot)
+		if (sourceArray[i] < pivot)
 		{
-			swap(&partitionArray[i], &partitionArray[position]);
+			swap(&sourceArray[i], &sourceArray[position]);
 			++position;
 		}
 	}
 
-	swap(&partitionArray[partLeftBorder], &partitionArray[position - 1]);
+	swap(&sourceArray[leftBorder], &sourceArray[position - 1]);
 
 	return position - 1;
 }
 
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
+void quickSort(int *sourceArray, int leftBorder, int rightBorder)
 {
-	if ((sortRightBorder - sortLeftBorder + 1) < 10)
+	if ((rightBorder - leftBorder + 1) < 10)
 	{
-		insertionSort(qsSourceArray, sortLeftBorder, sortRightBorder);
-		return 0;
+		insertionSort(sourceArray, leftBorder, rightBorder);
 	}
-
-	int divisor = arrayPartition(qsSourceArray, sortLeftBorder, sortRightBorder);
-	quickSort(qsSourceArray, sortLeftBorder, divisor - 1);
-	quickSort(qsSourceArray, divisor + 1, sortRightBorder);
-
-	return 0;
+	else
+	{
+		int divisor = arrayPartition(sourceArray, leftBorder, rightBorder);
+		quickSort(sourceArray, leftBorder, divisor - 1);
+		quickSort(sourceArray, divisor + 1, rightBorder);
+	}
 }

@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="hw3.1.cpp" />
     <ClCompile Include="quickSort.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="quickSort.h" />
