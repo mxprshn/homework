@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include "binaryOperations.h"
 
-void createBinary(int fromDecimal, bool *toBinary)
+void createBinary(int decimal, bool *binary)
 {
 	unsigned int bit = 0b01000000000000000000000000000000;
 
-	toBinary[0] = (fromDecimal < 0);
+	binary[0] = (decimal < 0);
 
 	for (int i = 1; i < bitNumberLength; ++i)
 	{
-		toBinary[i] = (fromDecimal & bit);
+		binary[i] = (decimal & bit);
 		bit = bit >> 1;
 	}
 }

@@ -2,9 +2,9 @@
 
 bool checkSum(int testDecimal1, int testDecimal2)
 {
-	bool testBinary1[bitNumberLength]{0};
-	bool testBinary2[bitNumberLength]{0};
-	bool testSum[bitNumberLength]{0};
+	bool testBinary1[bitNumberLength] {0};
+	bool testBinary2[bitNumberLength] {0};
+	bool testSum[bitNumberLength] {0};
 
 	createBinary(testDecimal1, testBinary1);
 	createBinary(testDecimal2, testBinary2);

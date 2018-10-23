@@ -25,9 +25,9 @@ int main()
 
 	scanf("%d%d", &decimal1, &decimal2);
 
-	bool binary1[bitNumberLength]{0};
-	bool binary2[bitNumberLength]{0};
-	bool sum[bitNumberLength]{0};
+	bool binary1[bitNumberLength] {0};
+	bool binary2[bitNumberLength] {0};
+	bool sum[bitNumberLength] {0};
 
 	createBinary(decimal1, binary1);
 	createBinary(decimal2, binary2);
