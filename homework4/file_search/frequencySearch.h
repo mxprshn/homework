@@ -1,4 +1,8 @@
 #pragma once
 
-int frequencySearch(int *searchingArray, int searchingArrayLength);
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
+#include <stdio.h>
+
+int frequencySearch(int *sourceArray, int arrayLength);
+void quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
+bool programTest();
+bool scanFile(FILE *inputFile, int *array, int arrayLength);

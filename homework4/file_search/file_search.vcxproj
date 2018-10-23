@@ -118,9 +118,14 @@
     <ClCompile Include="frequencySearch.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="quickSort.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frequencySearch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

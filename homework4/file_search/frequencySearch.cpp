@@ -1,14 +1,14 @@
 #include "frequencySearch.h"
 
-int frequencySearch(int *searchingArray, int searchingArrayLength)
+int frequencySearch(int *sourceArray, int arrayLength)
 {
 	int counter = 1;
 	int maximum = 0;
-	int mostFrequent = searchingArray[0];
+	int mostFrequent = sourceArray[0];
 
-	for (int i = 1; i < searchingArrayLength; ++i)
+	for (int i = 1; i < arrayLength; ++i)
 	{
-		if (searchingArray[i] == searchingArray[i - 1])
+		if (sourceArray[i] == sourceArray[i - 1])
 		{
 			++counter;
 		}
@@ -20,7 +20,7 @@ int frequencySearch(int *searchingArray, int searchingArrayLength)
 		if (counter > maximum)
 		{
 			maximum = counter;
-			mostFrequent = searchingArray[i - 1];
+			mostFrequent = sourceArray[i - 1];
 		}
 	}
 

@@ -7,35 +7,31 @@ void swap(int *element1, int *element2)
 	*element2 = buffer;
 }
 
-int arrayPartition(int *partitionArray, int partLeftBorder, int partRightBorder)
+int arrayPartition(int *sourceArray, int leftBorder, int rightBorder)
 {
-	const int pivot = partitionArray[partLeftBorder];
-	int position = partLeftBorder + 1;
+	const int pivot = sourceArray[leftBorder];
+	int position = leftBorder + 1;
 
-	for (int i = partLeftBorder + 1; i <= partRightBorder; ++i)
+	for (int i = leftBorder + 1; i <= rightBorder; ++i)
 	{
-		if (partitionArray[i] < pivot)
+		if (sourceArray[i] < pivot)
 		{
-			swap(&partitionArray[i], &partitionArray[position]);
+			swap(&sourceArray[i], &sourceArray[position]);
 			++position;
 		}
 	}
 
-	swap(&partitionArray[partLeftBorder], &partitionArray[position - 1]);
+	swap(&sourceArray[leftBorder], &sourceArray[position - 1]);
 
 	return position - 1;
 }
 
-int quickSort(int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
+void quickSort(int *sourceArray, int leftBorder, int rightBorder)
 {
-	if (sortRightBorder < sortLeftBorder)
+	if (rightBorder >= leftBorder)
 	{
-		return 0;
+		int divisor = arrayPartition(sourceArray, leftBorder, rightBorder);
+		quickSort(sourceArray, leftBorder, divisor - 1);
+		quickSort(sourceArray, divisor + 1, rightBorder);
 	}
-
-	int divisor = arrayPartition(qsSourceArray, sortLeftBorder, sortRightBorder);
-	quickSort(qsSourceArray, sortLeftBorder, divisor - 1);
-	quickSort(qsSourceArray, divisor + 1, sortRightBorder);
-
-	return 0;
 }
