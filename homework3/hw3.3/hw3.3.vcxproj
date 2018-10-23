@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="frequencySearch.cpp" />
+    <ClCompile Include="quickSort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frequencySearch.h" />
