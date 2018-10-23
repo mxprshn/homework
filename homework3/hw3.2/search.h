@@ -1,4 +1,4 @@
 #pragma once
 
-int binarySearch(long int *searchingArray, int searchingArrayLength, int searchElement);
-int quickSort(long int *qsSourceArray, int sortLeftBorder, int sortRightBorder);
+int binarySearch(long int *sourceArray, int arrayLength, int searchElement);
+void quickSort(long int *sourceArray, int leftBorder, int rightBorder);

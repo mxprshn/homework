@@ -7,21 +7,21 @@ void swap(long int *element1, long int *element2)
 	*element2 = buffer;
 }
 
-int binarySearch(long int *searchingArray, int searchingArrayLength, int searchElement)
+int binarySearch(long int *sourceArray, int arrayLength, int searchElement)
 {
 	int leftBorder = 0;
-	int rightBorder = searchingArrayLength - 1;
+	int rightBorder = arrayLength - 1;
 
 	while (leftBorder <= rightBorder)
 	{
 		int middle = ((leftBorder + rightBorder) / 2);
 
-		if (searchingArray[middle] == searchElement)
+		if (sourceArray[middle] == searchElement)
 		{
 			return middle;
 		}
 
-		if (searchElement > searchingArray[middle])
+		if (searchElement > sourceArray[middle])
 		{
 			leftBorder = middle + 1;
 		}
@@ -34,35 +34,31 @@ int binarySearch(long int *searchingArray, int searchingArrayLength, int searchE
 	return -1;
 }
 
-int arrayPartition(long int *partitionArray, int partLeftBorder, int partRightBorder)
+int arrayPartition(long int *sourceArray, int leftBorder, int rightBorder)
 {
-	const long int pivot = partitionArray[partLeftBorder];
-	int position = partLeftBorder + 1;
+	const long int pivot = sourceArray[leftBorder];
+	int position = leftBorder + 1;
 
-	for (int i = partLeftBorder + 1; i <= partRightBorder; ++i)
+	for (int i = leftBorder + 1; i <= rightBorder; ++i)
 	{
-		if (partitionArray[i] < pivot)
+		if (sourceArray[i] < pivot)
 		{
-			swap(&partitionArray[i], &partitionArray[position]);
+			swap(&sourceArray[i], &sourceArray[position]);
 			++position;
 		}
 	}
 
-	swap(&partitionArray[partLeftBorder], &partitionArray[position - 1]);
+	swap(&sourceArray[leftBorder], &sourceArray[position - 1]);
 
 	return position - 1;
 }
 
-int quickSort(long int *qsSourceArray, int sortLeftBorder, int sortRightBorder)
+void quickSort(long int *sourceArray, int leftBorder, int rightBorder)
 {
-	if (sortRightBorder < sortLeftBorder)
+	if (rightBorder >= leftBorder)
 	{
-		return 0;
+		int divisor = arrayPartition(sourceArray, leftBorder, rightBorder);
+		quickSort(sourceArray, leftBorder, divisor - 1);
+		quickSort(sourceArray, divisor + 1, rightBorder);
 	}
-
-	int divisor = arrayPartition(qsSourceArray, sortLeftBorder, sortRightBorder);
-	quickSort(qsSourceArray, sortLeftBorder, divisor - 1);
-	quickSort(qsSourceArray, divisor + 1, sortRightBorder);
-
-	return 0;
 }
