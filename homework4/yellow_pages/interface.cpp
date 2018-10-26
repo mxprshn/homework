@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include "phonebook.h"
 
+struct Record
+{
+	char name[nameLength];
+	char number[numberLength];
+};
 
 int userInterface(int recordAmount, Record *currentBase)
 {

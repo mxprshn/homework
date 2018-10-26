@@ -3,6 +3,12 @@
 #include <string.h>
 #include "phonebook.h"
 
+struct Record
+{
+	char name[nameLength];
+	char number[numberLength];
+};
+
 int readFile(Record *currentBase, const char *fileName)
 {
 	FILE *baseFile = fopen(fileName, "r");
@@ -79,4 +85,14 @@ int searchNumber(int recordAmount, Record *currentBase, char *targetName)
 	}
 
 	return -1;
+}
+
+Record *createBase()
+{
+	return new Record[baseSize]{};
+}
+
+void deleteBase(Record *currentBase)
+{
+	delete[] currentBase;
 }

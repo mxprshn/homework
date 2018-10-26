@@ -117,11 +117,13 @@
   <ItemGroup>
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source.cpp" />
+    <ClCompile Include="phonebook.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="interface.h" />
     <ClInclude Include="phonebook.h" />
+    <ClInclude Include="tests.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
