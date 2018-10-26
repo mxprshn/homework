@@ -2,7 +2,7 @@
 #include <locale.h>
 #include <stdio.h>
 #include "binaryOperations.h"
-
+#include "test.h"
 
 int main()
 {
