@@ -1,8 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "frequencySearch.h"
+#include "scanFile.h"
 
 bool programTest()
 {
+	const int mostFrequent1 = 0;
+	const int mostFrequent2 = -98;
+
 	FILE *inputFile = fopen("test.txt", "r");
 
 	if (!inputFile)
@@ -50,7 +54,7 @@ bool programTest()
 	quickSort(testArray1, 0, testArray1Length - 1);
 	quickSort(testArray2, 0, testArray2Length - 1);
 
-	if ((frequencySearch(testArray1, testArray1Length) != 0) || (frequencySearch(testArray2, testArray2Length) != -98))
+	if ((frequencySearch(testArray1, testArray1Length) != mostFrequent1) || (frequencySearch(testArray2, testArray2Length) != mostFrequent2))
 	{
 		delete[] testArray1;
 		delete[] testArray2;

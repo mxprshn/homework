@@ -2,21 +2,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <locale.h>
 #include "frequencySearch.h"
-
-bool scanFile(FILE *inputFile, int *array, int arrayLength)
-{
-	for (int i = 0; i < arrayLength; ++i)
-	{
-		if (feof(inputFile))
-		{
-			return false;
-		}
-
-		fscanf(inputFile, "%d", &array[i]);
-	}
-
-	return true;
-}
+#include "test.h"
+#include "scanFile.h"
 
 int main()
 {

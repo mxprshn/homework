@@ -118,10 +118,13 @@
     <ClCompile Include="frequencySearch.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="quickSort.cpp" />
+    <ClCompile Include="scanFile.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frequencySearch.h" />
+    <ClInclude Include="scanFile.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
