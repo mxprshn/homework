@@ -6,6 +6,8 @@ bool programTest()
 {
 	const int testArray1Length = 10;
 	const int testArray2Length = 10;
+	const int mostFrequent1 = 0;
+	const int mostFrequent2 = -98;
 
 	int testArray1[testArray1Length] = {0, 3, -1 , 6, 0, 6, 6, 0, 0, 11};
 	int testArray2[testArray2Length] = {-98, 0, 23, -98, 54, 76, 2, 23, 1, 0};
@@ -13,7 +15,7 @@ bool programTest()
 	quickSort(testArray1, 0, testArray1Length - 1);
 	quickSort(testArray2, 0, testArray2Length - 1);
 
-	if ((frequencySearch(testArray1, testArray1Length) != 0) || (frequencySearch(testArray2, testArray2Length) != -98))
+	if ((frequencySearch(testArray1, testArray1Length) != mostFrequent1) || (frequencySearch(testArray2, testArray2Length) != mostFrequent2))
 	{
 		return false;
 	}
