@@ -2,10 +2,22 @@
 #include <stdio.h>
 #include "sortedList.h"
 #include "userInterface.h"
+#include "tests.h"
 
 int main()
 {
-	SortedList list;
+	if (!programTest())
+	{
+		printf("Test not completed.\n");
+		return 1;
+	}
+	else
+	{
+		printf("Test completed.\n");
+	}
+
+	SortedList *list = createList();
 	userInterface(list);
+	deleteList(list);
 	return 0;
 }

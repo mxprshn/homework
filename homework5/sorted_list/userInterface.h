@@ -2,4 +2,4 @@
 
 #include "sortedList.h"
 
-int userInterface(SortedList &list);
+int userInterface(SortedList *list);

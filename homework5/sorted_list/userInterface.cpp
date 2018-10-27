@@ -3,7 +3,7 @@
 #include "sortedList.h"
 #include "userInterface.h"
 
-int userInterface(SortedList &list)
+int userInterface(SortedList *list)
 {
 	printf("Sorted list by mxprshn. 2018. All rights reserved.\n\n");
 	printf("Command list:\n");
@@ -46,8 +46,8 @@ int userInterface(SortedList &list)
 
 		else if (commandCode == 0)
 		{
-			deleteList(list);
 			printf("Exiting program...");
+			return 0;
 		}
 
 		else
