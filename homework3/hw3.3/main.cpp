@@ -16,7 +16,7 @@ bool programTest()
 	quickSort(testArray1, 0, testArray1Length - 1);
 	quickSort(testArray2, 0, testArray2Length - 1);
 
-	return ((frequencySearch(testArray1, testArray1Length) != mostFrequent1) || (frequencySearch(testArray2, testArray2Length) == mostFrequent2));
+	return ((frequencySearch(testArray1, testArray1Length) == mostFrequent1) || (frequencySearch(testArray2, testArray2Length) == mostFrequent2));
 }
 
 int main()
