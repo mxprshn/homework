@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "frequencySearch.h"
 #include "scanFile.h"
+#include "quickSort.h"
 
 bool programTest()
 {

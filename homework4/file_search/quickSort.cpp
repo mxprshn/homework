@@ -1,4 +1,5 @@
 #include "frequencySearch.h"
+#include "quickSort.h"
 
 void swap(int *element1, int *element2)
 {

@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frequencySearch.h" />
+    <ClInclude Include="quickSort.h" />
     <ClInclude Include="scanFile.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>

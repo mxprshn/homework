@@ -4,6 +4,7 @@
 #include "frequencySearch.h"
 #include "test.h"
 #include "scanFile.h"
+#include "quickSort.h"
 
 int main()
 {
