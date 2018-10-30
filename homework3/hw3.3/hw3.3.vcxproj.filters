@@ -29,5 +29,8 @@
     <ClInclude Include="frequencySearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="quickSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

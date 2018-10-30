@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "frequencySearch.h"
+#include "quickSort.h"
 
 bool programTest()
 {
@@ -15,12 +16,7 @@ bool programTest()
 	quickSort(testArray1, 0, testArray1Length - 1);
 	quickSort(testArray2, 0, testArray2Length - 1);
 
-	if ((frequencySearch(testArray1, testArray1Length) != mostFrequent1) || (frequencySearch(testArray2, testArray2Length) != mostFrequent2))
-	{
-		return false;
-	}
-
-	return true;
+	return ((frequencySearch(testArray1, testArray1Length) != mostFrequent1) || (frequencySearch(testArray2, testArray2Length) == mostFrequent2));
 }
 
 int main()
