@@ -47,7 +47,7 @@ void deleteCurrent(CyclicList *list)
 	}
 	else
 	{
-		const auto temp = list->current;
+		auto temp = list->current;
 		list->previous->next = list->current->next;
 		list->current = list->current->next;
 		delete temp;
@@ -69,7 +69,7 @@ void deleteList(CyclicList *list)
 {
 	while (!isOnly(list))
 	{
-		const auto temp = list->current;
+		auto temp = list->current;
 		list->current = list->current->next;
 		delete temp;
 	}
