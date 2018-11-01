@@ -63,6 +63,8 @@ void deleteList(SortedList *list)
 		list->minimum = list->minimum->next;
 		delete temp;
 	}
+
+	delete list;
 }
 
 bool deleteNode(SortedList *list, int targetPosition)
