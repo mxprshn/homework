@@ -25,7 +25,7 @@ bool isEmpty(CyclicList *list)
 
 void insert(CyclicList *list, int newValue)
 {
-	auto newNode = new Node{ newValue, list->current };
+	const auto newNode = new Node{ newValue, list->current };
 	
 	if (isEmpty(list))
 	{
@@ -39,10 +39,19 @@ void insert(CyclicList *list, int newValue)
 
 void deleteCurrent(CyclicList *list)
 {
-	const auto temp = list->current;
-	list->previous->next = list->current->next;
-	list->current = list->current->next;
-	delete temp;
+	if (isOnly(list))
+	{
+		list->current = nullptr;
+		delete list->current;
+		list->previous = nullptr;
+	}
+	else
+	{
+		const auto temp = list->current;
+		list->previous->next = list->current->next;
+		list->current = list->current->next;
+		delete temp;
+	}
 }
 
 void moveCurrent(CyclicList *list)
@@ -65,7 +74,11 @@ void deleteList(CyclicList *list)
 		delete temp;
 	}
 
-	delete list->current;
+	if (!isEmpty)
+	{
+		delete list->current;
+	}
+
 	delete list;
 }
 
