@@ -74,7 +74,7 @@ void deleteList(CyclicList *list)
 		delete temp;
 	}
 
-	if (!isEmpty)
+	if (!isEmpty(list))
 	{
 		delete list->current;
 	}
