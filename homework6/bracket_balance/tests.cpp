@@ -127,5 +127,4 @@ bool programTest()
 	testString.clear();
 
 	return checkBalance(testString);
-
 }
