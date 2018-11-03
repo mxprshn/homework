@@ -21,7 +21,7 @@ bool isEmpty(SortedList *list)
 
 void insert(SortedList *list, int newValue)
 {
-	auto newElement = new Node{ newValue, list->listLength + 1, nullptr };
+	const auto newElement = new Node{ newValue, list->listLength + 1, nullptr };
 
 	if (isEmpty(list))
 	{
