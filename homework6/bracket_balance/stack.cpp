@@ -13,8 +13,7 @@ struct Stack
 
 void push(Stack *stack, int value)
 {
-	const auto newElement = new StackElement{ value, stack->head };
-	stack->head = newElement;
+	stack->head = new StackElement{ value, stack->head };
 }
 
 int pop(Stack *stack, bool &result)
