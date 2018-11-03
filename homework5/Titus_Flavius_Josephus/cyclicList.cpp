@@ -30,24 +30,26 @@ void insert(CyclicList *list, int newValue)
 	if (isEmpty(list))
 	{
 		list->current = newNode;
-		list->previous = newNode;
+	}
+	else
+	{
+		list->previous->next = newNode;
 	}
 
-	list->previous->next = newNode;
-	list->previous = newNode;	
+	list->previous = newNode;
 }
 
 void deleteCurrent(CyclicList *list)
 {
 	if (isOnly(list))
 	{
-		list->current = nullptr;
 		delete list->current;
+		list->current = nullptr;
 		list->previous = nullptr;
 	}
 	else
 	{
-		auto temp = list->current;
+		const auto temp = list->current;
 		list->previous->next = list->current->next;
 		list->current = list->current->next;
 		delete temp;
@@ -69,7 +71,7 @@ void deleteList(CyclicList *list)
 {
 	while (!isOnly(list))
 	{
-		auto temp = list->current;
+		const auto temp = list->current;
 		list->current = list->current->next;
 		delete temp;
 	}
