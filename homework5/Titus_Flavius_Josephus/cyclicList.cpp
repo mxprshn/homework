@@ -29,6 +29,7 @@ void insert(CyclicList *list, int newValue)
 	
 	if (isEmpty(list))
 	{
+		newNode->next = newNode;
 		list->current = newNode;
 	}
 	else
