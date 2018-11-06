@@ -1,14 +1,10 @@
 #include "phonebook.h"
+#include "record.h"
 #include <string.h>
 
 const int realRecordAmount = 7;
 const char testBaseFileName[] = "test.txt";
 
-struct Record
-{
-	char name[nameLength];
-	char number[numberLength];
-};
 
 bool programTest()
 {
@@ -31,7 +27,7 @@ bool programTest()
 	char testName3[] = {"Elon Musk\n"};
 	char testNumber3[] = {"89821112000\n"};
 	
-	testRecordAmount = createRecord(testRecordAmount, testBase, testName1, testNumber1);
+	createRecord(testRecordAmount, testBase, testName1, testNumber1);
 
 	if (testRecordAmount != realRecordAmount + 1)
 	{

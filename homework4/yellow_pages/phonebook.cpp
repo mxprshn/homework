@@ -2,12 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "phonebook.h"
-
-struct Record
-{
-	char name[nameLength];
-	char number[numberLength];
-};
+#include "record.h"
 
 int readFile(Record *currentBase, const char *fileName)
 {
@@ -44,12 +39,11 @@ int writeFile(int writePosition, int recordAmount, Record *currentBase)
 	return recordAmount;
 }
 
-int createRecord(int recordAmount, Record *currentBase, char *newName, char *newNumber)
+void createRecord(int &recordAmount, Record *currentBase, char *newName, char *newNumber)
 {
 	strcpy(currentBase[recordAmount].name, newName);
 	strcpy(currentBase[recordAmount].number, newNumber);
 	++recordAmount;
-	return recordAmount;
 }
 
 void printBase(int recordAmount, Record *currentBase)

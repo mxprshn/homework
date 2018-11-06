@@ -1,12 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "phonebook.h"
-
-struct Record
-{
-	char name[nameLength];
-	char number[numberLength];
-};
+#include "record.h"
 
 int userInterface(int recordAmount, Record *currentBase)
 {
@@ -37,7 +32,7 @@ int userInterface(int recordAmount, Record *currentBase)
 			printf("Enter number: ");
 			fgets(newNumber, numberLength, stdin);
 
-			recordAmount = createRecord(recordAmount, currentBase, newName, newNumber);
+			createRecord(recordAmount, currentBase, newName, newNumber);
 		}
 
 		else if (commandCode == 2)
@@ -85,7 +80,7 @@ int userInterface(int recordAmount, Record *currentBase)
 
 		else if (commandCode == 5)
 		{
-			writePosition = writeFile(writePosition, recordAmount, currentBase);
+			writeFile(writePosition, recordAmount, currentBase);
 		}
 
 		else if (commandCode == 0)

@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="interface.h" />
     <ClInclude Include="phonebook.h" />
+    <ClInclude Include="record.h" />
     <ClInclude Include="tests.h" />
   </ItemGroup>
   <ItemGroup>
