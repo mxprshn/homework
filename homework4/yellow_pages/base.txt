@@ -1,0 +1,14 @@
+Dennis Ritcie
+89585410594
+Brian Kernighan
+89004343185
+Bjarne Stroustrup
+89813343001
+Ken Thompson
+89300227570
+Edsger W. Dijkstra
+83310092991
+Boris Demidovich
+89332778704
+Niklaus Wirth
+83364000199
