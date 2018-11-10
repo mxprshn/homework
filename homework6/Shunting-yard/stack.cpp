@@ -13,7 +13,8 @@ struct Stack
 
 void push(Stack *stack, int value)
 {
-	stack->head = new StackElement{ value, stack->head };
+	const auto newElement = new StackElement{ value, stack->head };
+	stack->head = newElement;
 }
 
 int pop(Stack *stack, bool &result)
@@ -36,7 +37,7 @@ bool isEmpty(Stack *stack)
 	return (stack->head == nullptr);
 }
 
-void deleteStack(Stack *stack)
+void deleteStack(Stack *&stack)
 {
 	while (!isEmpty(stack))
 	{
@@ -46,6 +47,7 @@ void deleteStack(Stack *stack)
 	}
 
 	delete stack;
+	stack = nullptr;
 }
 
 int head(Stack *stack, bool &result)
