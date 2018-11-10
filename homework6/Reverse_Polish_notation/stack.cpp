@@ -37,7 +37,7 @@ bool isEmpty(Stack *stack)
 	return (stack->head == nullptr);
 }
 
-void deleteStack(Stack *stack)
+void deleteStack(Stack *&stack)
 {
 	while (!isEmpty(stack))
 	{
@@ -47,6 +47,7 @@ void deleteStack(Stack *stack)
 	}
 
 	delete stack;
+	stack = nullptr;
 }
 
 Stack *createStack()

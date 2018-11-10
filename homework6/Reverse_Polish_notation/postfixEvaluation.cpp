@@ -1,6 +1,5 @@
 #include "stack.h"
-#include "tests.h"
-#include <iostream>
+#include "postfixEvaluation.h"
 #include <string>
 
 bool addition(Stack *operationStack)
@@ -59,41 +58,30 @@ int postfixEvaluation(std::string expression, bool &result)
 		{
 			push(operationStack, expression[i] - '0');
 		}
-		else if (expression[i] == '+')
+		else if ((expression[i] == '+') && (!addition(operationStack)))
 		{
-			if (!addition(operationStack))
-			{
-				result = false;
-				return -1;
-			}
+			result = false;
+			return -1;
 		}
-		else if (expression[i] == '-')
+		else if ((expression[i] == '-') && (!diminution(operationStack)))
 		{
-			if (!diminution(operationStack))
-			{
-				result = false;
-				return -1;
-			}
+			result = false;
+			return -1;
 		}
-		else if (expression[i] == '*')
+		else if ((expression[i] == '*') && (!multiplication(operationStack)))
 		{
-			if (!multiplication(operationStack))
-			{
-				result = false;
-				return -1;
-			}
+			result = false;
+			return -1;
 		}
-		else if (expression[i] == '/')
+		else if ((expression[i] == '/') && (!division(operationStack)))
 		{
-			if (!division(operationStack))
-			{
-				result = false;
-				return -1;
-			}
+			result = false;
+			return -1;
 		}
 	}
 
 	const int value = pop(operationStack, result);
+
 	if (!isEmpty(operationStack))
 	{
 		result = false;
@@ -101,35 +89,4 @@ int postfixEvaluation(std::string expression, bool &result)
 
 	deleteStack(operationStack);
 	return value;
-}
-
-int main()
-{
-	if (!programTest())
-	{
-		std::cout << "Test not completed." << std::endl;
-		return 1;
-	}
-	else
-	{
-		std::cout << "Test completed." << std::endl;
-	}
-
-	std::cout << "Enter an expression in Reverse Polish notaton: ";
-	std::string expression{};
-	std::getline(std::cin, expression);
-	bool result = true;
-	int value = postfixEvaluation(expression, result);
-
-	if (result)
-	{
-		std::cout << "Value of the expression: " << value << std::endl;
-	}
-	else
-	{
-		std::cout << "Calculation error :(" << std::endl;
-	}
-
-	std::cin.get();
-	return 0;
 }
