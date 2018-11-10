@@ -12,7 +12,7 @@ int pop(Stack *stack, bool &result);
 bool isEmpty(Stack *stack);
 
 //delete the stack completely
-void deleteStack(Stack *stack);
+void deleteStack(Stack *&stack);
 
 //create a new stack
 Stack *createStack();

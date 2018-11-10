@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bracketBalance.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="stack.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
