@@ -31,7 +31,7 @@ std::string shuntingYard(std::string infixExpression)
 				output += ' ';
 			}
 
-			if ((!popResult) || (!headResult))
+			if (!popResult)
 			{
 				deleteStack(operandStack);
 				return "Convertation error.";
