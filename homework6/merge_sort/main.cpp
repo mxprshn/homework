@@ -17,9 +17,13 @@ int main()
 	add(myList, "Andrey Merekhov", "88005553545");
 	add(myList, "Andrey Kerekhov", "88005553565");
 	add(myList, "Andrey Lerekhov", "88005553525");
+	add(myList, "Andrey Derekhov", "88005553525");
 	List left{};
 	List right{};
-	split(myList, left, right);
+	List riight{};
+	List leeft{};
+	split(myList, &left, &right);
+	split(&left, &leeft, &riight);
 
 	deleteList(myList);
 	return 0;

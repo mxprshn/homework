@@ -5,6 +5,6 @@ struct List;
 
 List *createList();
 bool isEmpty(List *list);
-void add(List *list, std::string name, std::string number);
+void add(List *list, const std::string &name, const std::string &number);
 void deleteList(List *&list);
-void split(List *list, List &left, List &right);
+void split(List *list, List *left, List *right);
