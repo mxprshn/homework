@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-std::string shuntingYard(std::string infixExpression)
+std::string shuntingYard(const std::string &infixExpression)
 {
 	Stack *operandStack = createStack();
 	std::string output{};
@@ -52,12 +52,11 @@ std::string shuntingYard(std::string infixExpression)
 
 			pop(operandStack, popResult);
 
-			if ((!popResult) || (!headResult))
+			if (!popResult)
 			{
 				deleteStack(operandStack);
 				return "Convertation error.";
 			}
-
 		}
 	}
 
@@ -70,13 +69,4 @@ std::string shuntingYard(std::string infixExpression)
 
 	deleteStack(operandStack);
 	return output;
-}
-
-int main()
-{
-	std::string infixExpression{};
-	std::getline(std::cin, infixExpression);
-	std::cout << shuntingYard(infixExpression) << std::endl;
-	std::cin.get();
-	return 0;
 }
