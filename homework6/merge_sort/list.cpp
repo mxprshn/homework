@@ -21,6 +21,12 @@ List *createList()
 	return new List;
 }
 
+
+int listLength(List *list)
+{
+	return list->length;
+}
+
 bool isEmpty(List *list)
 {
 	return (list->length == 0);
@@ -159,4 +165,38 @@ void printList(List *list)
 		std::cout << temp->name << " | " << temp->number << std::endl;
 		temp = temp->next;
 	}
+}
+
+bool checkSortByName(List *list)
+{
+	Node *temp = list->head->next;
+
+	while (temp != nullptr)
+	{
+		if (temp->name.compare(temp->previous->name) < 0)
+		{
+			return false;
+		}
+
+		temp = temp->next;
+	}
+
+	return true;
+}
+
+bool checkSortByNumber(List *list)
+{
+	Node *temp = list->head->next;
+
+	while (temp != nullptr)
+	{
+		if (temp->number.compare(temp->previous->number) < 0)
+		{
+			return false;
+		}
+
+		temp = temp->next;
+	}
+
+	return true;
 }
