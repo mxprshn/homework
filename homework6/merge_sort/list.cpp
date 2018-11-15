@@ -1,4 +1,5 @@
 #include "list.h"
+#include <iostream>
 
 struct Node
 {
@@ -59,9 +60,9 @@ void split(List *list, List *left, List *right)
 {	
 	Node *temp = list->tail;
 
-	for (int i = (list->length); i >= 1; --i)
+	for (int i = (list->length); i > 0; --i)
 	{
-		if (i > ((list->length) / 2) + 1)
+		if (i > (list->length) / 2)
 		{
 			add(right, temp->name, temp->number);
 		}
@@ -74,22 +75,57 @@ void split(List *list, List *left, List *right)
 	}
 }
 
-void mergeByName(List *list, List &left, List &right)
+void mergeByName(List *list, List *left, List *right)
 {
-	Node *temp = list->head;
-	Node *tempLeft = left.head;
-	Node *tempRight = right.head;
+	Node *tempTarget = list->head;
+	Node *tempLeft = left->head;
+	Node *tempRight = right->head;
 
-	for (int i = 1; i <= list->length; ++i)
+	while ((tempLeft != nullptr) || (tempRight != nullptr))
 	{
-		if (tempLeft->name.compare(tempRight->name) < 0)
+		if ((tempRight == nullptr) || ((tempLeft != nullptr) && (tempLeft->name.compare(tempRight->name) < 0)))
 		{
-			
+			tempTarget->name = tempLeft->name;
+			tempTarget->number = tempLeft->number;
+			tempLeft = tempLeft->next;
 		}
+		else
+		{
+			tempTarget->name = tempRight->name;
+			tempTarget->number = tempRight->number;
+			tempRight = tempRight->next;
+		}
+
+		tempTarget = tempTarget->next;
 	}
 }
 
-void mergeSort(List *list)
+void mergeByNumber(List *list, List *left, List *right)
+{
+	Node *tempTarget = list->head;
+	Node *tempLeft = left->head;
+	Node *tempRight = right->head;
+
+	while ((tempLeft != nullptr) || (tempRight != nullptr))
+	{
+		if ((tempRight == nullptr) || ((tempLeft != nullptr) && (tempLeft->number.compare(tempRight->number) < 0)))
+		{
+			tempTarget->name = tempLeft->name;
+			tempTarget->number = tempLeft->number;
+			tempLeft = tempLeft->next;
+		}
+		else
+		{
+			tempTarget->name = tempRight->name;
+			tempTarget->number = tempRight->number;
+			tempRight = tempRight->next;
+		}
+
+		tempTarget = tempTarget->next;
+	}
+}
+
+void mergeSort(List *list, bool byName)
 {
 	if (list->length == 1)
 	{
@@ -98,8 +134,29 @@ void mergeSort(List *list)
 
 	List left{};
 	List right{};
+
 	split(list, &left, &right);
-	mergeSort(&left);
-	mergeSort(&right);
-//	mergeByName(list, &left, &right);
+
+	mergeSort(&left, byName);
+	mergeSort(&right, byName);
+
+	if (byName)
+	{
+		mergeByName(list, &left, &right);
+	}
+	else
+	{
+		mergeByNumber(list, &left, &right);
+	}
+}
+
+void printList(List *list)
+{
+	Node *temp = list->head;
+
+	while (temp != nullptr)
+	{
+		std::cout << temp->name << " | " << temp->number << std::endl;
+		temp = temp->next;
+	}
 }
