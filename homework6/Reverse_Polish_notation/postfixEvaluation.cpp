@@ -52,28 +52,28 @@ int postfixEvaluation(const std::string &expression, bool &result)
 {
 	auto operationStack = createStack();
 
-	for (unsigned int i = 0; i < expression.length(); ++i)
+	for (const char current : expression)
 	{
-		if ((expression[i] - '0' >= 0) && (expression[i] - '0' <= 9))
+		if ((current - '0' >= 0) && (current - '0' <= 9))
 		{
-			push(operationStack, expression[i] - '0');
+			push(operationStack, current - '0');
 		}
-		else if ((expression[i] == '+') && (!addition(operationStack)))
-		{
-			result = false;
-			return -1;
-		}
-		else if ((expression[i] == '-') && (!diminution(operationStack)))
+		else if ((current == '+') && (!addition(operationStack)))
 		{
 			result = false;
 			return -1;
 		}
-		else if ((expression[i] == '*') && (!multiplication(operationStack)))
+		else if ((current == '-') && (!diminution(operationStack)))
 		{
 			result = false;
 			return -1;
 		}
-		else if ((expression[i] == '/') && (!division(operationStack)))
+		else if ((current == '*') && (!multiplication(operationStack)))
+		{
+			result = false;
+			return -1;
+		}
+		else if ((current == '/') && (!division(operationStack)))
 		{
 			result = false;
 			return -1;
