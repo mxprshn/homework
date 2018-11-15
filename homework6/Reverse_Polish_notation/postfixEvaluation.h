@@ -3,4 +3,4 @@
 #include <string>
 
 //find the value of expression in postfix notation
-int postfixEvaluation(std::string expression, bool &result);
+int postfixEvaluation(const std::string &expression, bool &result);

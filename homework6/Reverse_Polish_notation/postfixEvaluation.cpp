@@ -48,7 +48,7 @@ bool division(Stack *operationStack)
 	return result;
 }
 
-int postfixEvaluation(std::string expression, bool &result)
+int postfixEvaluation(const std::string &expression, bool &result)
 {
 	auto operationStack = createStack();
 
