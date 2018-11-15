@@ -1,5 +1,4 @@
 #include "stack.h"
-#include <iostream>
 #include <string>
 
 std::string shuntingYard(const std::string &infixExpression)
@@ -7,17 +6,31 @@ std::string shuntingYard(const std::string &infixExpression)
 	Stack *operandStack = createStack();
 	std::string output{};
 
-	for (int i = 0; i < infixExpression.length(); ++i)
+	for (const char current : infixExpression)
 	{
-		const char current = infixExpression[i];
-
 		if ((current - '0' >= 0) && (current - '0' <= 9))
 		{
 			output += current;
 			output += ' ';
 		}
-		else if ((current == '(') || (current == '*') || (current == '/'))
+		else if (current == '(')
 		{
+			push(operandStack, current);
+		}
+		else if ((current == '*') || (current == '/'))
+		{
+			bool popResult = true;
+			bool headResult = true;
+
+			int headValue = head(operandStack, headResult);
+
+			while ((headValue == '*') || (headValue == '/'))
+			{
+				output += pop(operandStack, popResult);
+				output += ' ';
+				headValue = head(operandStack, headResult);
+			}
+
 			push(operandStack, current);
 		}
 		else if ((current == '+') || (current == '-'))
@@ -25,16 +38,13 @@ std::string shuntingYard(const std::string &infixExpression)
 			bool popResult = true;
 			bool headResult = true;
 
-			while ((head(operandStack, headResult) == '*') || (head(operandStack, headResult) == '/'))
+			int headValue = head(operandStack, headResult);
+
+			while ((headValue == '*') || (headValue == '/') || (headValue == '+') || (headValue == '-'))
 			{
 				output += pop(operandStack, popResult);
 				output += ' ';
-			}
-
-			if (!popResult)
-			{
-				deleteStack(operandStack);
-				return "Convertation error.";
+				headValue = head(operandStack, headResult);
 			}
 
 			push(operandStack, current);
@@ -44,19 +54,13 @@ std::string shuntingYard(const std::string &infixExpression)
 			bool popResult = true;
 			bool headResult = true;
 
-			while (head(operandStack, headResult) != '(')
+			while ((head(operandStack, headResult) != '(') && (headResult))
 			{
-				output += pop(operandStack, popResult);
+				output += pop(operandStack, popResult);				
 				output += ' ';
 			}
 
-			pop(operandStack, popResult);
-
-			if (!popResult)
-			{
-				deleteStack(operandStack);
-				return "Convertation error.";
-			}
+			pop(operandStack, popResult);			
 		}
 	}
 
