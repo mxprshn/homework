@@ -1,26 +1,16 @@
 #include "list.h"
+#include "readFile.h"
 #include <fstream>
 
 bool programTest()
 {
 	std::ifstream testFile("test.txt", std::ios::in);
-
-	if (!testFile.is_open())
-	{
-		return false;
-	}
-
 	List *testList = createList();
 
-	while (!testFile.eof())
+	if (!readFile(testFile, testList))
 	{
-		std::string name{};
-		std::string number{};
-
-		getline(testFile, name);
-		getline(testFile, number);
-
-		add(testList, name, number);
+		deleteList(testList);
+		return false;
 	}
 
 	testFile.close();
@@ -29,6 +19,7 @@ bool programTest()
 
 	if (!checkSortByName(testList))
 	{
+		deleteList(testList);
 		return false;
 	}
 
@@ -36,8 +27,10 @@ bool programTest()
 
 	if (!checkSortByNumber(testList))
 	{
+		deleteList(testList);
 		return false;
 	}
 
+	deleteList(testList);
 	return true;
 }

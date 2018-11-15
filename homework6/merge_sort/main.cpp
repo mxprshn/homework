@@ -1,5 +1,6 @@
 #include "list.h"
 #include "tests.h"
+#include "readFile.h"
 #include <iostream>
 #include <fstream>
 
@@ -16,28 +17,17 @@ int main()
 	}
 
 	std::ifstream file("input.txt", std::ios::in);
+	List *list = createList();
 
-	if (!file.is_open())
+	if (!readFile(file, list))
 	{
 		std::cout << "File not found." << std::endl;
+		deleteList(list);
 		return 1;
 	}
 	else
 	{
-		std::cout << "File opened." << std::endl;
-	}
-
-	List *myList = createList();
-
-	while (!file.eof())
-	{
-		std::string name{};
-		std::string number{};
-
-		getline(file, name);
-		getline(file, number);
-
-		add(myList, name, number);
+		std::cout << "File read." << std::endl;
 	}
 
 	file.close();
@@ -56,20 +46,20 @@ int main()
 
 		if (command == 1)
 		{
-			printList(myList);
+			printList(list);
 		}
 		else if (command == 2)
 		{
-			mergeSort(myList, true);
+			mergeSort(list, true);
 			std::cout << "List is sorted by name." << std::endl;
 		}
 		else if (command == 3)
 		{
-			mergeSort(myList, false);
+			mergeSort(list, false);
 			std::cout << "List is sorted by number." << std::endl;
 		}
 	}
 
-	deleteList(myList);
+	deleteList(list);
 	return 0;
 }
