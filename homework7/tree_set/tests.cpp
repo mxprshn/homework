@@ -42,8 +42,8 @@ bool programTest()
 
 	file.close();
 
-	bool isBinary = true;
-	checkTraversal(testSet->root, isBinary);
+	bool isBinarySearch = true;
+	checkTraversal(testSet->root, isBinarySearch);
 
 	file.open("test.txt", std::ios::in);
 
@@ -76,5 +76,5 @@ bool programTest()
 	}
 
 	deleteSet(testSet);
-	return isBinary;
+	return isBinarySearch;
 }
