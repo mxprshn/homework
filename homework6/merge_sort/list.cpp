@@ -3,8 +3,8 @@
 
 struct Node
 {
-	std::string name{};
-	std::string number{};
+	std::string name;
+	std::string number;
 	Node *previous = nullptr;
 	Node *next = nullptr;
 };

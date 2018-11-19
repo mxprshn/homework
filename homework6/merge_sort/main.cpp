@@ -42,6 +42,8 @@ int main()
 
 	while (command != 0)
 	{
+		std::cout << std::endl << "Enter a command: ";
+
 		std::cin >> command;
 
 		if (command == 1)

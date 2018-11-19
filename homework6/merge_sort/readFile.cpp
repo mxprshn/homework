@@ -11,8 +11,8 @@ bool readFile(std::ifstream &file, List *list)
 
 	while (!file.eof())
 	{
-		std::string name{};
-		std::string number{};
+		std::string name;
+		std::string number;
 
 		getline(file, name);
 		getline(file, number);
