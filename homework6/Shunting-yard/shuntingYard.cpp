@@ -4,11 +4,11 @@
 std::string shuntingYard(const std::string &infixExpression)
 {
 	Stack *operandStack = createStack();
-	std::string output{};
+	std::string output;
 
 	for (const char current : infixExpression)
 	{
-		if ((current - '0' >= 0) && (current - '0' <= 9))
+		if (isdigit(current))
 		{
 			output += current;
 			output += ' ';

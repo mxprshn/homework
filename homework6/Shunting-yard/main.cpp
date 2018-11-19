@@ -15,7 +15,7 @@ int main()
 		std::cout << "Test completed." << std::endl;
 	}
 
-	std::string infixExpression{};
+	std::string infixExpression;
 
 	std::cout << "Enter an expression in infix notiation: ";
 	std::getline(std::cin, infixExpression);
