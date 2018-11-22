@@ -1,18 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-
-struct Node
-{
-	int value = 0;
-	Node *left = nullptr;
-	Node *right = nullptr;
-};
-
-struct Tree
-{
-	Node *root = nullptr;
-};
+#include "treeStructure.h"
 
 Node *createNode(std::ifstream &input)
 {
@@ -29,7 +18,7 @@ Node *createNode(std::ifstream &input)
 		newNode->right = createNode(input);
 		input.get();
 	}
-	else if (isdigit(current))
+	else if ((isdigit(current)) || (current == '-'))
 	{
 		input >> newNode->value;
 	}
@@ -144,5 +133,7 @@ void printTree(Tree *tree)
 
 	printNode(tree->root);
 }
+
+
 
 
