@@ -1,5 +1,18 @@
 #include <iostream>
-#include "tree.h"
+#include <vector>
+
+struct Node
+{
+	int value = 0;
+	Node *left = nullptr;
+	Node *right = nullptr;
+	Node *parent = nullptr;
+};
+
+struct Set
+{
+	Node *root = nullptr;
+};
 
 void removeByNode(Node *&currentNode, int targetValue);
 
@@ -13,7 +26,7 @@ bool isEmpty(Set *set)
 	return (set->root == nullptr);
 }
 
-bool exists(Set *set, int targetValue)
+bool exists(Set *set, const int targetValue)
 {
 	if (isEmpty(set))
 	{
@@ -37,7 +50,7 @@ bool exists(Set *set, int targetValue)
 	return (temp != nullptr);
 }
 
-bool add(Set *set, int newValue)
+bool add(Set *set, const int newValue)
 {
 	if (exists(set, newValue))
 	{
@@ -116,7 +129,7 @@ void removeTwoChildren(Node *&targetNode)
 }
 
 
-void removeByNode(Node *&currentNode, int targetValue)
+void removeByNode(Node *&currentNode, const int targetValue)
 {
 	if (targetValue < currentNode->value)
 	{
@@ -143,7 +156,7 @@ void removeByNode(Node *&currentNode, int targetValue)
 	}
 }
 
-bool remove(Set *set, int targetValue)
+bool remove(Set *set, const int targetValue)
 {
 	if (!exists(set, targetValue))
 	{
@@ -155,58 +168,62 @@ bool remove(Set *set, int targetValue)
 	return true;
 }
 
-void leftTraversal(Node *current)
+void leftTraversal(Node *current, std::vector<int> &values)
 {
 	if (current->left != nullptr)
 	{
-		leftTraversal(current->left);
+		leftTraversal(current->left, values);
 	}
 
-	std::cout << current->value << ' ';;
+	values.push_back(current->value);
 
 	if (current->right != nullptr)
 	{
-		leftTraversal(current->right);
+		leftTraversal(current->right, values);
 	}
 }
 
-void rightTraversal(Node *current)
+void rightTraversal(Node *current, std::vector<int> &values)
 {
 	if (current->right != nullptr)
 	{
-		rightTraversal(current->right);
+		rightTraversal(current->right, values);
 	}
 
-	std::cout << current->value << ' ';
+	values.push_back(current->value);
 
 	if (current->left != nullptr)
 	{
-		rightTraversal(current->left);
+		rightTraversal(current->left, values);
 	}
 }
 
-bool ascendingPrint(Set *set)
+std::vector<int> ascendingOrder(Set *set)
 {
+	std::vector<int> values;
+
 	if (isEmpty(set))
 	{
-		return false;
+		return values;
 	}
 
-	leftTraversal(set->root);
+	leftTraversal(set->root, values);
 
-	return true;
+	return values;
 }
 
-bool descendingPrint(Set *set)
+std::vector<int> descendingOrder(Set *set)
 {
+	std::vector<int> values;
+
 	if (isEmpty(set))
 	{
-		return false;
+		return values;
 	}
 
-	rightTraversal(set->root);
+	rightTraversal(set->root, values);
 
-	return true;
+	return values;
 }
 
 void deleteTraversal(Node *current)
@@ -230,6 +247,7 @@ void deleteSet(Set *&set)
 	{
 		deleteTraversal(set->root);
 	}
+
 	delete set;
 	set = nullptr;
 }

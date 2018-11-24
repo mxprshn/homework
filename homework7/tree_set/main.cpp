@@ -7,12 +7,12 @@ int main()
 {
 	if (!programTest())
 	{
-		std::cout << "Test failed.\n";
+		std::cout << "Test failed." << std::endl;
 		return 1;
 	}
 	else
 	{
-		std::cout << "Test completed.\n\n";
+		std::cout << "Test completed." << std::endl << std::endl;
 	}
 
 	Set *set = createSet();

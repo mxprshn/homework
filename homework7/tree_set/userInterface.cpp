@@ -3,7 +3,6 @@
 
 void userInterface(Set *set)
 {
-	std::cout << "Set by mxprshn. All rights reserved. 2018" << std::endl << std::endl;
 	std::cout << "Command list:" << std::endl;
 	std::cout << "0 - Exit program" << std::endl;
 	std::cout << "1 - Add a new value to the set" << std::endl;
@@ -36,9 +35,16 @@ void userInterface(Set *set)
 		}
 		case 2:
 		{
-			if (!ascendingPrint(set))
+			if (isEmpty(set))
 			{
-				std::cout << "The set is empty.";
+				std::cout << "The set is empty." << std::endl;
+				break;
+			}
+
+			const std::vector<int> orderedValues = ascendingOrder(set);
+			for (int i : orderedValues)
+			{
+				std::cout << i << ' ';
 			}
 
 			std::cout << std::endl;
@@ -46,9 +52,16 @@ void userInterface(Set *set)
 		}
 		case 3:
 		{
-			if (!descendingPrint(set))
+			if (isEmpty(set))
 			{
-				std::cout << "The set is empty.";
+				std::cout << "The set is empty." << std::endl;
+				break;
+			}
+
+			const std::vector<int> orderedValues = descendingOrder(set);
+			for (int i : orderedValues)
+			{
+				std::cout << i << ' ';
 			}
 
 			std::cout << std::endl;

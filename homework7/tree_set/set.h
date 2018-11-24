@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 struct Set;
 
@@ -6,22 +7,22 @@ struct Set;
 Set *createSet();
 
 //check existence of value in the set
-bool exists(Set *set, int targetValue);
+bool exists(Set *set, const int targetValue);
 
 //add a new value to the set
-bool add(Set *set, int newValue);
+bool add(Set *set, const int newValue);
 
 //remove a value from the set
-bool remove(Set *set, int targetValue);
+bool remove(Set *set, const int targetValue);
 
 //check the set for emptiness
 bool isEmpty(Set *set);
 
-//print all elements of the set in ascending order
-bool ascendingPrint(Set *set);
+//get vector of elements in ascending order
+std::vector<int> ascendingOrder(Set *set);
 
-//print all elements of the set in descending order
-bool descendingPrint(Set *set);
+//get vector of elements in descending order
+std::vector<int> descendingOrder(Set *set);
 
 //delete the set completely
 void deleteSet(Set *&set);

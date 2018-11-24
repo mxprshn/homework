@@ -1,26 +1,6 @@
 #include <fstream>
+#include <vector>
 #include "set.h"
-#include "tree.h"
-
-void checkTraversal(Node *current, bool &result)
-{
-	if (((current->left != nullptr) && (current->left->value >= current->value))
-		|| ((current->right != nullptr) && (current->right->value <= current->value)))
-	{
-		result = false;
-	}
-	else
-	{
-		if (current->left != nullptr)
-		{
-			checkTraversal(current->left, result);
-		}
-		if (current->right != nullptr)
-		{
-			checkTraversal(current->right, result);
-		}
-	}
-}
 
 bool programTest()
 {
@@ -42,9 +22,6 @@ bool programTest()
 
 	file.close();
 
-	bool isBinarySearch = true;
-	checkTraversal(testSet->root, isBinarySearch);
-
 	file.open("test.txt", std::ios::in);
 
 	while (!file.eof())
@@ -58,6 +35,30 @@ bool programTest()
 	}
 
 	file.close();
+
+	const std::vector<int> ascendingOrderedValues = ascendingOrder(testSet);
+	const std::vector<int> descendingOrderedValues = descendingOrder(testSet);
+
+	if (ascendingOrderedValues.size() != descendingOrderedValues.size())
+	{
+		return false;
+	}
+
+	for (unsigned int i = 0; i < ascendingOrderedValues.size() - 1; ++i)
+	{
+		if (ascendingOrderedValues[i] >= ascendingOrderedValues[i + 1])
+		{
+			return false;
+		}
+	}
+
+	for (unsigned int i = 0; i < descendingOrderedValues.size() - 1; ++i)
+	{
+		if (descendingOrderedValues[i] <= descendingOrderedValues[i + 1])
+		{
+			return false;
+		}
+	}
 
 	file.open("test.txt", std::ios::in);
 
@@ -76,5 +77,6 @@ bool programTest()
 	}
 
 	deleteSet(testSet);
-	return isBinarySearch;
+
+	return true;
 }
