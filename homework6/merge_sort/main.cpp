@@ -1,6 +1,7 @@
 #include "list.h"
 #include "tests.h"
 #include "readFile.h"
+#include "mergeSort.h"
 #include <iostream>
 #include <fstream>
 
@@ -13,7 +14,7 @@ int main()
 	}
 	else
 	{
-		std::cout << "Test completed." << std::endl;
+		std::cout << "Test completed." << std::endl << std::endl;
 	}
 
 	std::ifstream file("input.txt", std::ios::in);

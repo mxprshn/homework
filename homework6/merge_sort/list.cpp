@@ -51,6 +51,12 @@ std::string number(Node *node)
 	return node->number;
 }
 
+void copyRecord(Node *&source, Node *&target)
+{
+	target->name = source->name;
+	target->number = source->number;
+}
+
 int listLength(List *list)
 {
 	return list->length;

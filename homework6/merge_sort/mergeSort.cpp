@@ -23,7 +23,7 @@ void split(List *&list, List *&left, List *&right)
 	}
 }
 
-void merge(List *list, List *left, List *right, const bool byName)
+void merge(List *&list, List *&left, List *&right, const bool byName)
 {
 	Node *tempTarget = head(list);
 	Node *tempLeft = head(left);
@@ -31,22 +31,34 @@ void merge(List *list, List *left, List *right, const bool byName)
 
 	while ((tempLeft != nullptr) || (tempRight != nullptr))
 	{
-		const int result = byName ? name(tempLeft).compare(name(tempRight)) : number(tempLeft).compare(number(tempRight));
-
-		if ((tempRight == nullptr) || ((tempLeft != nullptr) && (result < 0)))
+		if ((tempLeft != nullptr) && (tempRight != nullptr))
 		{
-			tempTarget->name = tempLeft->name;
-			tempTarget->number = tempLeft->number;
-			tempLeft = tempLeft->next;
+			const int result = byName ? name(tempLeft).compare(name(tempRight)) : number(tempLeft).compare(number(tempRight));
+
+			if (result < 0)
+			{
+				copyRecord(tempLeft, tempTarget);
+				tempLeft = next(tempLeft);
+			}
+			else
+			{
+				copyRecord(tempRight, tempTarget);
+				tempRight = next(tempRight);
+			}
+		}
+		else if (tempRight == nullptr)
+		{
+
+			copyRecord(tempLeft, tempTarget);
+			tempLeft = next(tempLeft);
 		}
 		else
 		{
-			tempTarget->name = tempRight->name;
-			tempTarget->number = tempRight->number;
-			tempRight = tempRight->next;
+			copyRecord(tempRight, tempTarget);
+			tempRight = next(tempRight);
 		}
 
-		tempTarget = tempTarget->next;
+		tempTarget = next(tempTarget);
 	}
 }
 
@@ -73,18 +85,18 @@ void mergeSort(List *list, const bool byName)
 
 bool checkSort(List *list, const bool byName)
 {
-	Node *temp = list->head->next;
+	Node *temp = next(head(list));
 
 	while (temp != nullptr)
 	{
-		const int result = byName ? temp->name.compare(temp->previous->name) : temp->number.compare(temp->previous->number);
+		const int result = byName ? name(temp).compare(name(previous(temp))) : number(temp).compare(number(previous(temp)));
 
 		if (result < 0)
 		{
 			return false;
 		}
 
-		temp = temp->next;
+		temp = next(temp);
 	}
 
 	return true;

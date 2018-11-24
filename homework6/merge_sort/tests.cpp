@@ -1,4 +1,5 @@
 #include "list.h"
+#include "mergeSort.h"
 #include "readFile.h"
 #include <fstream>
 
@@ -17,7 +18,7 @@ bool programTest()
 
 	mergeSort(testList, true);
 
-	if (!checkSortByName(testList))
+	if (!checkSort(testList, true))
 	{
 		deleteList(testList);
 		return false;
@@ -25,7 +26,7 @@ bool programTest()
 
 	mergeSort(testList, false);
 
-	if (!checkSortByNumber(testList))
+	if (!checkSort(testList, false))
 	{
 		deleteList(testList);
 		return false;
