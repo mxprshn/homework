@@ -117,11 +117,13 @@
   <ItemGroup>
     <ClCompile Include="list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mergeSort.cpp" />
     <ClCompile Include="readFile.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h" />
+    <ClInclude Include="mergeSort.h" />
     <ClInclude Include="readFile.h" />
     <ClInclude Include="tests.h" />
   </ItemGroup>

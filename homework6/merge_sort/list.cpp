@@ -21,6 +21,35 @@ List *createList()
 	return new List;
 }
 
+Node *head(List *list)
+{
+	return list->head;
+}
+
+Node *tail(List *list)
+{
+	return list->tail;
+}
+
+Node *next(Node *current)
+{
+	return current->next;
+}
+
+Node *previous(Node *current)
+{
+	return current->previous;
+}
+
+std::string name(Node *node)
+{
+	return node->name;
+}
+
+std::string number(Node *node)
+{
+	return node->number;
+}
 
 int listLength(List *list)
 {
@@ -62,100 +91,6 @@ void deleteList(List *&list)
 	list = nullptr;
 }
 
-void split(List *list, List *left, List *right)
-{	
-	Node *temp = list->tail;
-
-	for (int i = (list->length); i > 0; --i)
-	{
-		if (i > (list->length) / 2)
-		{
-			add(right, temp->name, temp->number);
-		}
-		else
-		{
-			add(left, temp->name, temp->number);
-		}
-
-		temp = temp->previous;
-	}
-}
-
-void mergeByName(List *list, List *left, List *right)
-{
-	Node *tempTarget = list->head;
-	Node *tempLeft = left->head;
-	Node *tempRight = right->head;
-
-	while ((tempLeft != nullptr) || (tempRight != nullptr))
-	{
-		if ((tempRight == nullptr) || ((tempLeft != nullptr) && (tempLeft->name.compare(tempRight->name) < 0)))
-		{
-			tempTarget->name = tempLeft->name;
-			tempTarget->number = tempLeft->number;
-			tempLeft = tempLeft->next;
-		}
-		else
-		{
-			tempTarget->name = tempRight->name;
-			tempTarget->number = tempRight->number;
-			tempRight = tempRight->next;
-		}
-
-		tempTarget = tempTarget->next;
-	}
-}
-
-void mergeByNumber(List *list, List *left, List *right)
-{
-	Node *tempTarget = list->head;
-	Node *tempLeft = left->head;
-	Node *tempRight = right->head;
-
-	while ((tempLeft != nullptr) || (tempRight != nullptr))
-	{
-		if ((tempRight == nullptr) || ((tempLeft != nullptr) && (tempLeft->number.compare(tempRight->number) < 0)))
-		{
-			tempTarget->name = tempLeft->name;
-			tempTarget->number = tempLeft->number;
-			tempLeft = tempLeft->next;
-		}
-		else
-		{
-			tempTarget->name = tempRight->name;
-			tempTarget->number = tempRight->number;
-			tempRight = tempRight->next;
-		}
-
-		tempTarget = tempTarget->next;
-	}
-}
-
-void mergeSort(List *list, bool byName)
-{
-	if (list->length == 1)
-	{
-		return;
-	}
-
-	List left{};
-	List right{};
-
-	split(list, &left, &right);
-
-	mergeSort(&left, byName);
-	mergeSort(&right, byName);
-
-	if (byName)
-	{
-		mergeByName(list, &left, &right);
-	}
-	else
-	{
-		mergeByNumber(list, &left, &right);
-	}
-}
-
 void printList(List *list)
 {
 	Node *temp = list->head;
@@ -165,38 +100,4 @@ void printList(List *list)
 		std::cout << temp->name << " | " << temp->number << std::endl;
 		temp = temp->next;
 	}
-}
-
-bool checkSortByName(List *list)
-{
-	Node *temp = list->head->next;
-
-	while (temp != nullptr)
-	{
-		if (temp->name.compare(temp->previous->name) < 0)
-		{
-			return false;
-		}
-
-		temp = temp->next;
-	}
-
-	return true;
-}
-
-bool checkSortByNumber(List *list)
-{
-	Node *temp = list->head->next;
-
-	while (temp != nullptr)
-	{
-		if (temp->number.compare(temp->previous->number) < 0)
-		{
-			return false;
-		}
-
-		temp = temp->next;
-	}
-
-	return true;
 }

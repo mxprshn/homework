@@ -2,6 +2,19 @@
 #include <string>
 
 struct List;
+struct Node;
+
+Node *head(List *list);
+
+Node *tail(List *list);
+
+Node *next(Node *current);
+
+Node *previous(Node *current);
+
+std::string name(Node *node);
+
+std::string number(Node *node);
 
 //create a new list and get pointer to it
 List *createList();
@@ -19,13 +32,10 @@ void add(List *list, const std::string &name, const std::string &number);
 void deleteList(List *&list);
 
 //sort list (by name if "byName" = true, else by number)
-void mergeSort(List *list, bool byName);
+void mergeSort(List *list, const bool byName);
 
 //print all the records
 void printList(List *list);
 
-//check if list is sorted by name
-bool checkSortByName(List *list);
-
-//check if list is sorted by number
-bool checkSortByNumber(List *list);
+//check if list is sorted (by name if "byName" = true, else by number)
+bool checkSort(List *list, const bool byName);
