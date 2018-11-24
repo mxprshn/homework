@@ -30,7 +30,6 @@
   <ItemGroup>
     <ClInclude Include="tests.h" />
     <ClInclude Include="tree.h" />
-    <ClInclude Include="treeStructure.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

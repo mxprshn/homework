@@ -1,18 +1,4 @@
 #include "tree.h"
-#include "treeStructure.h"
-
-bool isCorrect(Node *current)
-{
-	if ((current->value == '/') || (current->value == '*') || (current->value == '+') || (current->value == '-'))
-	{
-		return (((current->left != nullptr) && (current->right != nullptr))
-			&& ((isCorrect(current->left)) && (isCorrect(current->right))));
-	}
-	else
-	{
-		return ((current->left == nullptr) && (current->right == nullptr));
-	}
-}
 
 bool programTest()
 {
@@ -32,11 +18,6 @@ bool programTest()
 	testFile.close();
 
 	if (isEmpty(testTree1) || (isEmpty(testTree2)) || (isEmpty(testTree3)))
-	{
-		return false;
-	}
-
-	if (!isCorrect(testTree1->root) || (!isCorrect(testTree2->root)) || (!isCorrect(testTree3->root)))
 	{
 		return false;
 	}

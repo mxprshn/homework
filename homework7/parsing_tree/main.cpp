@@ -24,15 +24,16 @@ int main()
 	}
 	else
 	{
-		std::cout << "Input file opened." << std::endl;
+		std::cout << "Input file opened." << std::endl << std::endl;
 	}
 
 	Tree *parsingTree = createTree(inputFile);
 
-	std::cout << "Value of the expression: " << treeEvaluation(parsingTree) << std::endl;
+	std::cout << "Value of the expression: " << treeEvaluation(parsingTree) << std::endl << std::endl;
 
 	std::cout << "Source tree: ";
 	printTree(parsingTree);
+	std::cout << std::endl;
 
 	deleteTree(parsingTree);
 	inputFile.close();

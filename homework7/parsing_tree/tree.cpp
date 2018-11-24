@@ -1,7 +1,18 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "treeStructure.h"
+
+struct Node
+{
+	int value = 0;
+	Node *left = nullptr;
+	Node *right = nullptr;
+};
+
+struct Tree
+{
+	Node *root = nullptr;
+};
 
 Node *createNode(std::ifstream &input)
 {
@@ -127,7 +138,7 @@ void printTree(Tree *tree)
 {
 	if (isEmpty(tree))
 	{
-		std::cout << "The tree is empty" << std::endl;
+		std::cout << "The tree is empty." << std::endl;
 		return;
 	}
 
