@@ -40,11 +40,5 @@ void add(List *list, const std::string &name, const std::string &number);
 //delete list completely
 void deleteList(List *&list);
 
-//sort list (by name if "byName" = true, else by number)
-void mergeSort(List *list, const bool byName);
-
 //print all the records
 void printList(List *list);
-
-//check if list is sorted (by name if "byName" = true, else by number)
-bool checkSort(List *list, const bool byName);
