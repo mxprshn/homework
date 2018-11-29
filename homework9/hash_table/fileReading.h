@@ -4,4 +4,5 @@
 #include <vector>
 #include <string>
 
-std::vector<std::string> readFile(std::ifstream &file, HashTable *& hashTable, std::vector<std::string> &wordVector);
+//add words from file to the hash table and return vector of them
+std::vector<std::string> readFile(std::ifstream &file, HashTable *& hashTable);
