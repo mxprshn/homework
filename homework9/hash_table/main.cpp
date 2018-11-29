@@ -11,7 +11,7 @@ int main()
 	if (!programTest())
 	{
 		std::cout << "Test failed." << std::endl;
-		return 0;
+		return 1;
 	}
 	else
 	{
