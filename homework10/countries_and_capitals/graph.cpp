@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <limits>
+
 
 struct Vertex
 {
@@ -103,6 +105,47 @@ bool isAdjacent(Graph *graph, const int vertexA, const int vertexB)
 	return false;
 }
 
+int edgeLength(Graph *graph, const int vertexA, const int vertexB)
+{
+	if ((graph->vertices.count(vertexA) == 0) || (graph->vertices.count(vertexB) == 0))
+	{
+		return 0;
+	}
+
+	return graph->edges[graph->vertices[vertexA].index][graph->vertices[vertexB].index];
+}
+
+void findClosest(Graph *graph, const int city, int &minLength, int &closestCity)
+{
+	for (int current : adjacent(graph, city))
+	{
+		const int distance = edgeLength(graph, city, current);
+		if ((distance < minLength) && (belongs(graph, current) == 0))
+		{
+			minLength = edgeLength(graph, city, current);
+			closestCity = current;
+		}
+	}
+}
+
+bool addCity(Graph *graph, const int country, std::vector<int> &cities)
+{
+	int minLength = std::numeric_limits<int>::max();
+	int closestCity = -1;
+
+	for (int currentCity : cities)
+	{
+		findClosest(graph, currentCity, minLength, closestCity);
+	}
+
+	if (closestCity >= 0)
+	{
+		assign(graph, closestCity, country);
+	}
+
+	return (closestCity >= 0);
+}
+
 int main()
 {
 	std::ifstream input("input.txt", std::ios::in);
@@ -132,12 +175,22 @@ int main()
 
 	int capitalsAmount = 0;
 	input >> capitalsAmount;
+	std::vector<std::vector<int>> countries;
 
 	for (int i = 1; i < capitalsAmount + 1; ++i)
 	{
 		int capital = 0;
 		input >> capital;
 		assign(graph, capital, i);
+		countries.push_back({ capital });
+	}
+
+	while (true)
+	{
+		for (int i = 0; i < countries.size(); ++i)
+		{
+			addCity(graph, i + 1, countries[i]);
+		}
 	}
 
 	return 0;
