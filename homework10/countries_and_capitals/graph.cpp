@@ -2,14 +2,11 @@
 #include <unordered_map>
 #include <iostream>
 #include <iomanip>
-#include <fstream>
-#include <limits>
-
 
 struct Vertex
 {
 	int index = 0;
-	int belongs = 0;
+	bool belongs = false;
 };
 
 struct Graph
@@ -24,17 +21,17 @@ Graph *newGraph()
 	return new Graph;
 }
 
-void assign(Graph *graph, const int vertex, const int target)
+void assign(Graph *graph, const int vertex)
 {
 	if (graph->vertices.count(vertex) == 0)
 	{
 		return;
 	}
 
-	graph->vertices[vertex].belongs = target;
+	graph->vertices[vertex].belongs = true;
 }
 
-int belongs(Graph *graph, const int vertex)
+bool belongs(Graph *graph, const int vertex)
 {
 	if (graph->vertices.count(vertex) == 0)
 	{
@@ -115,83 +112,15 @@ int edgeLength(Graph *graph, const int vertexA, const int vertexB)
 	return graph->edges[graph->vertices[vertexA].index][graph->vertices[vertexB].index];
 }
 
-void findClosest(Graph *graph, const int city, int &minLength, int &closestCity)
+void printGraph(Graph *graph)
 {
-	for (int current : adjacent(graph, city))
+	for (std::vector<int> current : graph->edges)
 	{
-		const int distance = edgeLength(graph, city, current);
-		if ((distance < minLength) && (belongs(graph, current) == 0))
+		for (int currentVertex : current)
 		{
-			minLength = edgeLength(graph, city, current);
-			closestCity = current;
+			std::cout << std::setw(4) << currentVertex;
 		}
+
+		std::cout << std::endl;
 	}
-}
-
-bool addCity(Graph *graph, const int country, std::vector<int> &cities)
-{
-	int minLength = std::numeric_limits<int>::max();
-	int closestCity = -1;
-
-	for (int currentCity : cities)
-	{
-		findClosest(graph, currentCity, minLength, closestCity);
-	}
-
-	if (closestCity >= 0)
-	{
-		assign(graph, closestCity, country);
-	}
-
-	return (closestCity >= 0);
-}
-
-int main()
-{
-	std::ifstream input("input.txt", std::ios::in);
-
-	if (!input.is_open())
-	{
-		return 1;
-	}
-
-	Graph *graph = newGraph();
-
-	int citiesAmount = 0;
-	input >> citiesAmount;
-	int roadsAmount = 0;
-	input >> roadsAmount;
-	
-	for (int i = 0; i < roadsAmount; ++i)
-	{
-		int vertexA = 0;
-		int vertexB = 0;
-		int roadLength = 0;
-		input >> vertexA;
-		input >> roadLength;
-		input >> vertexB;
-		addEdge(graph, vertexA, vertexB, roadLength);
-	}
-
-	int capitalsAmount = 0;
-	input >> capitalsAmount;
-	std::vector<std::vector<int>> countries;
-
-	for (int i = 1; i < capitalsAmount + 1; ++i)
-	{
-		int capital = 0;
-		input >> capital;
-		assign(graph, capital, i);
-		countries.push_back({ capital });
-	}
-
-	while (true)
-	{
-		for (int i = 0; i < countries.size(); ++i)
-		{
-			addCity(graph, i + 1, countries[i]);
-		}
-	}
-
-	return 0;
 }
