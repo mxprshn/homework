@@ -1,4 +1,5 @@
 #include "hashTable.h"
+#include "fileReading.h"
 #include <fstream>
 #include <iostream>
 #include <iomanip>
@@ -9,31 +10,18 @@ int main()
 {
 	HashTable *wordTable = newTable();
 
-	std::ifstream file("input.txt", std::ios::in);
+	std::ifstream input("input.txt", std::ios::in);
 
-	if (!file.is_open())
+	if (!input.is_open())
 	{
-		std::cout << "File not found." << std::endl;
+		std::cout << "File not open." << std::endl;
 	}
 
-	std::vector<std::string> fileWords;
+	std::vector<std::string> textWords = readFile(input, wordTable);
 
-	while (!file.eof())
-	{
-		std::string word;
-		file >> word;
-		if (!wordExists(wordTable, word))
-		{
-			fileWords.push_back(word);
-		}
-		add(wordTable, word);
-	}
+	input.close();
 
-	file.close();
-
-	std::sort(fileWords.begin(), fileWords.end());
-
-	for (std::string current : fileWords)
+	for (std::string current : textWords)
 	{
 		std::cout << std::setfill('-') << std::setw(15) << std::left << current;
 		std::cout << amountByWord(wordTable, current) << std::endl;

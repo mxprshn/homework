@@ -23,12 +23,12 @@ HashTable *newTable()
 	return newHashTable;
 }
 
-float averageLength(const HashTable *table)
+float averageLength(const HashTable *hashTable)
 {
 	int sum = 0;
 	int notEmptyAmount = 0;
 
-	for (List *current : table->buckets)
+	for (List *current : hashTable->buckets)
 	{
 		if (!isEmpty(current))
 		{
@@ -40,16 +40,16 @@ float averageLength(const HashTable *table)
 	return (float)sum / (float)notEmptyAmount;
 }
 
-float loadFactor(const HashTable *table)
+float loadFactor(const HashTable *hashTable)
 {
-	return (float)table->elementsAmount / (float)table->buckets.size();
+	return (float)hashTable->elementsAmount / (float)hashTable->buckets.size();
 }
 
-int maxLength(const HashTable *table)
+int maxLength(const HashTable *hashTable)
 {
 	int result = 0;
 
-	for (List *current : table->buckets)
+	for (List *current : hashTable->buckets)
 	{
 		result = std::max(listLength(current), result);
 	}
@@ -109,7 +109,7 @@ void expand(HashTable *hashTable)
 
 void add(HashTable *hashTable, const std::string &word)
 {
-	if (((float)hashTable->elementsAmount / (float)hashTable->buckets.size()) > 1.0)
+	if (loadFactor(hashTable) > 1.0)
 	{
 		expand(hashTable);
 	}
@@ -128,29 +128,29 @@ void add(HashTable *hashTable, const std::string &word)
 	}
 }
 
-void deleteTable(HashTable *&table)
+void deleteTable(HashTable *&hashTable)
 {
-	for (List *current : table->buckets)
+	for (List *current : hashTable->buckets)
 	{
 		deleteList(current);
 	}
 
-	delete table;
-	table = nullptr;
+	delete hashTable;
+	hashTable = nullptr;
 }
 
-bool wordExists(const HashTable *table, const std::string &word)
+bool wordExists(const HashTable *hashTable, const std::string &word)
 {
-	const int wordHash = hash(word) % table->buckets.size();
-	Node *wordNode = exists(table->buckets[wordHash], word);
+	const int wordHash = hash(word) % hashTable->buckets.size();
+	Node *wordNode = exists(hashTable->buckets[wordHash], word);
 
 	return (wordNode != nullptr);
 }
 
-int amountByWord(const HashTable *table, const std::string &word)
+int amountByWord(const HashTable *hashTable, const std::string &word)
 {
-	const int wordHash = hash(word) % table->buckets.size();
-	Node *wordNode = exists(table->buckets[wordHash], word);
+	const int wordHash = hash(word) % hashTable->buckets.size();
+	Node *wordNode = exists(hashTable->buckets[wordHash], word);
 
 	if (wordNode == nullptr)
 	{
