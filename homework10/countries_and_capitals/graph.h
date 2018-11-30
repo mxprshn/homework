@@ -11,4 +11,3 @@ bool isAdjacent(Graph *graph, const int vertexA, const int vertexB);
 bool belongs(Graph *graph, const int vertex);
 void assign(Graph *graph, const int vertex);
 int edgeLength(Graph *graph, const int vertexA, const int vertexB);
-void printGraph(Graph *graph);
