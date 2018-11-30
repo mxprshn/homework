@@ -34,9 +34,7 @@ std::vector<Country> fileReading(Graph *graph)
 		int vertexB = 0;
 		int roadLength = 0;
 
-		input >> vertexA;
-		input >> roadLength;
-		input >> vertexB;
+		input >> vertexA >> roadLength >> vertexB;
 
 		addEdge(graph, vertexA, vertexB, roadLength);
 	}

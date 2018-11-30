@@ -1,7 +1,5 @@
 #include <vector>
 #include <unordered_map>
-#include <iostream>
-#include <iomanip>
 
 struct Vertex
 {
@@ -43,7 +41,7 @@ bool belongs(Graph *graph, const int vertex)
 
 void addVertex(Graph *graph, const int vertex)
 {
-	graph->vertices.insert(std::pair<int, Vertex>(vertex, { graph->vertexAmount, 0 }));
+	graph->vertices.insert(std::pair<int, Vertex>(vertex, { graph->vertexAmount, false }));
 	++graph->vertexAmount;
 	graph->edges.resize(graph->vertexAmount);
 
@@ -110,17 +108,4 @@ int edgeLength(Graph *graph, const int vertexA, const int vertexB)
 	}
 
 	return graph->edges[graph->vertices[vertexA].index][graph->vertices[vertexB].index];
-}
-
-void printGraph(Graph *graph)
-{
-	for (std::vector<int> current : graph->edges)
-	{
-		for (int currentVertex : current)
-		{
-			std::cout << std::setw(4) << currentVertex;
-		}
-
-		std::cout << std::endl;
-	}
 }
