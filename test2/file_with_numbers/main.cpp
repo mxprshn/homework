@@ -1,4 +1,5 @@
 #include "list.h"
+#include "tests.h"
 #include <fstream>
 #include <iostream>
 
@@ -64,6 +65,11 @@ bool numberTransfer(std::ifstream &input, std::ofstream &output, const int left,
 
 int main()
 {
+	if (!programTest())
+	{
+		return 1;
+	}
+
 	int a = 0;
 	int b = 0;
 	std::cout << "Enter a: ";

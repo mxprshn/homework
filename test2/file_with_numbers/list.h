@@ -4,12 +4,6 @@
 struct List;
 struct Node;
 
-//remove node from the list
-void removeNode(List *list, const Node *targetNode);
-
-//get pointer to the node with value or null pointer if it doesn't exist
-Node *exists(const List *list, const int targetValue);
-
 //get value by pointer to node
 int value(const Node *targetNode);
 

@@ -21,9 +21,18 @@
     <ClCompile Include="list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,6 +41,12 @@
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="g.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="ftest.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="gtest.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

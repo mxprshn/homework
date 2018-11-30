@@ -54,47 +54,6 @@ bool isEmpty(const List *list)
 	return (list->length == 0);
 }
 
-void removeNode(List *list, const Node *targetNode)
-{
-	if (targetNode->previous != nullptr)
-	{
-		targetNode->previous->next = targetNode->next;
-	}
-	else
-	{
-		list->head = targetNode->next;
-	}
-
-	if (targetNode->next != nullptr)
-	{
-		targetNode->next->previous = targetNode->previous;
-	}
-	else
-	{
-		list->tail = targetNode->previous;
-	}
-
-	--list->length;
-	delete targetNode;
-}
-
-Node *exists(const List *list, const int targetValue) 
-{
-	Node *temp = list->head;
-
-	while (temp != nullptr)
-	{
-		if (temp->value == targetValue)
-		{
-			return temp;
-		}
-
-		temp = temp->next;
-	}
-
-	return temp;
-}
-
 void add(List *list, const int value)
 {
 	list->head = new Node{ value, nullptr, list->head };
@@ -113,7 +72,7 @@ void add(List *list, const int value)
 
 void deleteList(List *&list)
 {
-	while ((list->head) != (list->tail))
+	while (list->head != list->tail)
 	{
 		const Node *temp = list->head;
 		list->head = list->head->next;
