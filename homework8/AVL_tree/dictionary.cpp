@@ -17,7 +17,7 @@ struct Dictionary
 	Node *root = nullptr;
 };
 
-//void removeByNode(Node *&currentNode, int targetValue);
+void removeByNode(Node *&currentNode, const std::string &targetKey);
 
 Dictionary *createDictionary()
 {
@@ -152,165 +152,117 @@ void add(Dictionary *dictionary, const std::string &key, const std::string &newV
 	addByNode(dictionary->root, nullptr, key, newValue);
 }
 
-//int minimum(Node *currentNode)
-//{
-//	if (currentNode->left != nullptr)
-//	{
-//		return minimum(currentNode->left);
-//	}
-//	else
-//	{
-//		return currentNode->value;
-//	}
-//}
+std::string minimum(Node *currentNode)
+{
+	if (currentNode->left != nullptr)
+	{
+		return minimum(currentNode->left);
+	}
+	else
+	{
+		return currentNode->key;
+	}
+}
 
-//void removeNoChildren(Node *&targetNode)
-//{
-//	Node *temp = targetNode;
-//	targetNode = nullptr;
-//	delete temp;
-//}
-//
-//void removeOneChild(Node *targetNode)
-//{
-//	Node *temp = (targetNode->left != nullptr) ? targetNode->left : targetNode->right;
-//
-//	targetNode->value = temp->value;	
-//	targetNode->left = temp->left;
-//	targetNode->right = temp->right;
-//	delete temp;
-//}
-//
-//void removeTwoChildren(Node *&targetNode)
-//{
-//	const int rightMinimum = minimum(targetNode->right);
-//	removeByNode(targetNode, rightMinimum);
-//	targetNode->value = rightMinimum;
-//}
-//
-//
-//void removeByNode(Node *&currentNode, const int targetValue)
-//{
-//	if (targetValue < currentNode->value)
-//	{
-//		removeByNode(currentNode->left, targetValue);
-//	}
-//	else if (targetValue > currentNode->value)
-//	{
-//		removeByNode(currentNode->right, targetValue);
-//	}
-//	else
-//	{
-//		if ((currentNode->left == nullptr) && (currentNode->right == nullptr))
-//		{
-//			removeNoChildren(currentNode);
-//		}
-//		else if ((currentNode->left != nullptr) && (currentNode->right != nullptr))
-//		{
-//			removeTwoChildren(currentNode);
-//		}
-//		else
-//		{
-//			removeOneChild(currentNode);
-//		}
-//	}
-//}
-//
-//bool remove(Set *set, const int targetValue)
-//{
-//	if (!exists(set, targetValue))
-//	{
-//		return false;
-//	}
-//
-//	removeByNode(set->root, targetValue);
-//
-//	return true;
-//}
-//
-//void leftTraversal(Node *current, std::vector<int> &values)
-//{
-//	if (current->left != nullptr)
-//	{
-//		leftTraversal(current->left, values);
-//	}
-//
-//	values.push_back(current->value);
-//
-//	if (current->right != nullptr)
-//	{
-//		leftTraversal(current->right, values);
-//	}
-//}
-//
-//void rightTraversal(Node *current, std::vector<int> &values)
-//{
-//	if (current->right != nullptr)
-//	{
-//		rightTraversal(current->right, values);
-//	}
-//
-//	values.push_back(current->value);
-//
-//	if (current->left != nullptr)
-//	{
-//		rightTraversal(current->left, values);
-//	}
-//}
-//
-//std::vector<int> ascendingOrder(Set *set)
-//{
-//	std::vector<int> values;
-//
-//	if (isEmpty(set))
-//	{
-//		return values;
-//	}
-//
-//	leftTraversal(set->root, values);
-//
-//	return values;
-//}
-//
-//std::vector<int> descendingOrder(Set *set)
-//{
-//	std::vector<int> values;
-//
-//	if (isEmpty(set))
-//	{
-//		return values;
-//	}
-//
-//	rightTraversal(set->root, values);
-//
-//	return values;
-//}
-//
-//void deleteTraversal(Node *current)
-//{
-//	if (current->left != nullptr)
-//	{
-//		deleteTraversal(current->left);
-//	}
-//
-//	if (current->right != nullptr)
-//	{
-//		deleteTraversal(current->right);
-//	}
-//
-//	delete current;
-//}
-//
-//void deleteSet(Set *&set)
-//{
-//	if (!isEmpty(set))
-//	{
-//		deleteTraversal(set->root);
-//	}
-//
-//	delete set;
-//	set = nullptr;
-//}
+void removeNoChildren(Node *&targetNode)
+{
+	Node *temp = targetNode;
+	targetNode = nullptr;
+	delete temp;
+}
+
+void removeOneChild(Node *targetNode)
+{
+	Node *temp = (targetNode->left != nullptr) ? targetNode->left : targetNode->right;
+	targetNode->key = temp->key;
+	targetNode->value = temp->value;
+	targetNode->left = temp->left;
+	targetNode->right = temp->right;
+	targetNode->height = temp->height;
+	delete temp;
+}
+
+void removeTwoChildren(Node *&targetNode)
+{
+	const std::string rightMinimum = minimum(targetNode->right);
+	removeByNode(targetNode, rightMinimum);
+	targetNode->key = rightMinimum;
+}
+
+
+void removeByNode(Node *&currentNode, const std::string &targetKey)
+{
+	if (targetKey < currentNode->key)
+	{
+		removeByNode(currentNode->left, targetKey);
+	}
+	else if (targetKey > currentNode->key)
+	{
+		removeByNode(currentNode->right, targetKey);
+	}
+	else
+	{
+		if ((currentNode->left == nullptr) && (currentNode->right == nullptr))
+		{
+			removeNoChildren(currentNode);
+		}
+		else if ((currentNode->left != nullptr) && (currentNode->right != nullptr))
+		{
+			removeTwoChildren(currentNode);
+		}
+		else
+		{
+			removeOneChild(currentNode);
+		}
+
+		return;
+	}
+
+	if (abs(balanceFactor(currentNode)) > 1)
+	{
+		balance(currentNode);
+	}
+
+	correctHeight(currentNode);
+}
+
+bool remove(Dictionary *dictionary, const std::string &targetKey)
+{
+	if (!exists(dictionary, targetKey))
+	{
+		return false;
+	}
+
+	removeByNode(dictionary->root, targetKey);
+
+	return true;
+}
+
+void deleteTraversal(Node *current)
+{
+	if (current->left != nullptr)
+	{
+		deleteTraversal(current->left);
+	}
+
+	if (current->right != nullptr)
+	{
+		deleteTraversal(current->right);
+	}
+
+	delete current;
+}
+
+void deleteDictionary(Dictionary *&dictionary)
+{
+	if (!isEmpty(dictionary))
+	{
+		deleteTraversal(dictionary->root);
+	}
+
+	delete dictionary;
+	dictionary = nullptr;
+}
 
 int main()
 {
@@ -323,6 +275,13 @@ int main()
 	add(dict, "ttt", "5");
 	add(dict, "wwww", "5");
 	add(dict, "wwwww", "5");
+	remove(dict, "d");
+	remove(dict, "a");
+	remove(dict, "b");
+	remove(dict, "c");
+	remove(dict, "e");
+	remove(dict, "wwww");
+	remove(dict, "wwwww");
 
 	return 0;
 }
