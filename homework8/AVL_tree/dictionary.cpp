@@ -17,9 +17,7 @@ struct Dictionary
 	Node *root = nullptr;
 };
 
-void removeByNode(Node *&currentNode, const std::string &targetKey);
-
-Dictionary *createDictionary()
+Dictionary *newDictionary()
 {
 	return new Dictionary;
 }
@@ -101,6 +99,22 @@ void balance(Node *&root)
 	}
 }
 
+std::string value(Dictionary *dictionary, const std::string &targetKey)
+{
+	if (isEmpty(dictionary))
+	{
+		return "";
+	}
+
+	Node *temp = dictionary->root;
+
+	while ((temp != nullptr) && (temp->key != targetKey))
+	{
+		temp = (targetKey < temp->key) ? temp->left : temp->right;
+	}
+
+	return (temp != nullptr) ? temp->value : "";
+}
 
 void addByNode(Node *&root, Node *parent, const std::string &key, const std::string &newValue)
 {
@@ -120,7 +134,7 @@ void addByNode(Node *&root, Node *parent, const std::string &key, const std::str
 
 	if (root->key == key)
 	{
-		root->key = key;
+		root->value = newValue;
 		return;
 	}
 
@@ -163,6 +177,8 @@ std::string minimum(Node *currentNode)
 		return currentNode->key;
 	}
 }
+
+void removeByNode(Node *&currentNode, const std::string &targetKey);
 
 void removeNoChildren(Node *&targetNode)
 {
@@ -262,26 +278,4 @@ void deleteDictionary(Dictionary *&dictionary)
 
 	delete dictionary;
 	dictionary = nullptr;
-}
-
-int main()
-{
-	Dictionary *dict = createDictionary();
-	add(dict, "a", "5");
-	add(dict, "b", "5");
-	add(dict, "c", "5");
-	add(dict, "d", "5");
-	add(dict, "e", "5");
-	add(dict, "ttt", "5");
-	add(dict, "wwww", "5");
-	add(dict, "wwwww", "5");
-	remove(dict, "d");
-	remove(dict, "a");
-	remove(dict, "b");
-	remove(dict, "c");
-	remove(dict, "e");
-	remove(dict, "wwww");
-	remove(dict, "wwwww");
-
-	return 0;
 }

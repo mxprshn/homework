@@ -1,28 +1,24 @@
 #pragma once
-#include <vector>
+#include <string>
 
-struct Set;
+struct Dictionary;
 
-//get pointer to the new set
-Set *createSet();
+Dictionary *newDictionary();
 
-//check existence of value in the set
-bool exists(Set *set, const int targetValue);
+//creates new dictionary and returns pointer to it
+bool isEmpty(Dictionary *dictionary);
 
-//add a new value to the set
-bool add(Set *set, const int newValue);
+//checks a key for existence in dictionary
+bool exists(Dictionary *dictionary, const std::string &targetKey);
 
-//remove a value from the set
-bool remove(Set *set, const int targetValue);
+//returns value by its key
+std::string value(Dictionary *dictionary, const std::string &targetKey);
 
-//check the set for emptiness
-bool isEmpty(Set *set);
+//adds a new value to dictionary
+void add(Dictionary *dictionary, const std::string &key, const std::string &newValue);
 
-//get vector of elements in ascending order
-std::vector<int> ascendingOrder(Set *set);
+//removes a key from dictionary
+bool remove(Dictionary *dictionary, const std::string &targetKey);
 
-//get vector of elements in descending order
-std::vector<int> descendingOrder(Set *set);
-
-//delete the set completely
-void deleteSet(Set *&set);
+//deletes dictionary completely
+void deleteDictionary(Dictionary *&dictionary);
