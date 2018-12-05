@@ -18,11 +18,7 @@ void userInterface(Dictionary *dictionary)
 		std::cout << std::endl << "Enter a command: ";
 		std::getline(std::cin, command);
 
-		if (command == "0")
-		{
-			break;
-		}
-		else if (command == "1")
+		if (command == "1")
 		{
 			std::string key;
 			std::string value;
@@ -63,7 +59,11 @@ void userInterface(Dictionary *dictionary)
 			std::cout << "Enter a key: ";
 			std::getline(std::cin, key);
 
-			remove(dictionary, key);
+			if (!remove(dictionary, key))
+			{
+				std::cout << "This key doesn't exist." << std::endl;
+			}
+
 		}
 	}
 }
