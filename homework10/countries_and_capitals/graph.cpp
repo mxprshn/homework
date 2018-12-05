@@ -41,7 +41,7 @@ bool belongs(Graph *graph, const int vertex)
 
 void addVertex(Graph *graph, const int vertex)
 {
-	graph->vertices.insert(std::pair<int, Vertex>(vertex, { graph->vertexAmount, false }));
+	graph->vertices.insert({vertex, {graph->vertexAmount, false}});
 	++graph->vertexAmount;
 	graph->edges.resize(graph->vertexAmount);
 

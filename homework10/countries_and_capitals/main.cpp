@@ -47,7 +47,7 @@ std::vector<Country> fileReading(Graph *graph)
 		int capital = 0;
 		input >> capital;
 		assign(graph, capital);
-		countries.push_back({ { capital }, false });
+		countries.push_back({{capital}, false});
 	}
 
 	input.close();
