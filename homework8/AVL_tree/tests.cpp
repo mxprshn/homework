@@ -1,12 +1,12 @@
 #include <fstream>
 #include <string>
-#include <unordered_map>
+#include <map>
 #include "dictionary.h"
 
 bool programTest()
 {
 	Dictionary *testDictionary = newDictionary();
-	std::unordered_map<std::string, std::string> values;
+	std::map<std::string, std::string> values;
 
 	if (!isEmpty(testDictionary))
 	{
@@ -36,7 +36,35 @@ bool programTest()
 
 	testFile.close();
 
+	for (std::pair<std::string, std::string> current : values)
+	{
+		if (!exists(testDictionary, current.first))
+		{
+			deleteDictionary(testDictionary);
+			return false;
+		}
 
+		if (value(testDictionary, current.first) != current.second)
+		{
+			deleteDictionary(testDictionary);
+			return false;
+		}
 
+		remove(testDictionary, current.first);
 
+		if (exists(testDictionary, current.first))
+		{
+			deleteDictionary(testDictionary);
+			return false;
+		}
+	}
+
+	if (!isEmpty(testDictionary))
+	{
+		deleteDictionary(testDictionary);
+		return false;
+	}
+
+	deleteDictionary(testDictionary);
+	return true;
 }

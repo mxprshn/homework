@@ -81,7 +81,7 @@ void balance(Node *&root)
 {
 	if (balanceFactor(root) == -2)
 	{
-		if (balanceFactor(root->left) <= 0)
+		if (balanceFactor(root->left) > 0)
 		{
 			leftRotation(root->left);
 		}
@@ -90,7 +90,7 @@ void balance(Node *&root)
 	}
 	else
 	{
-		if (balanceFactor(root->right) <= 0)
+		if (balanceFactor(root->right) < 0)
 		{
 			rightRotation(root->right);
 		}
