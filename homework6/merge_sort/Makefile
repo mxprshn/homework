@@ -13,4 +13,4 @@ list.o: list.cpp list.h
 	g++ -c list.cpp
 
 clean:
-	rm *.o
+	del *.o
