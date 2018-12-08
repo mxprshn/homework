@@ -33,7 +33,7 @@ bool belongs(Graph *graph, const int vertex)
 {
 	if (graph->vertices.count(vertex) == 0)
 	{
-		return 0;
+		return false;
 	}
 
 	return graph->vertices[vertex].belongs;

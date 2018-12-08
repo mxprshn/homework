@@ -88,6 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,10 +123,12 @@
   <ItemGroup>
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="priorityQueue.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graph.h" />
+    <ClInclude Include="priorityQueue.h" />
     <ClInclude Include="tests.h" />
   </ItemGroup>
   <ItemGroup>

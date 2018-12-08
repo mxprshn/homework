@@ -1,15 +1,14 @@
 #include <vector>
-#include <unordered_map>
 #include <iostream>
 #include <fstream>
-#include <limits>
 #include "graph.h"
 #include "tests.h"
+#include "priorityQueue.h"
 
 struct Country
 {
 	std::vector<int> cities;
-	bool isComplete = false;
+	PriorityQueue *toAdd;
 };
 
 std::vector<Country> fileReading(Graph *graph)
@@ -47,7 +46,12 @@ std::vector<Country> fileReading(Graph *graph)
 		int capital = 0;
 		input >> capital;
 		assign(graph, capital);
-		countries.push_back({{capital}, false});
+		countries.push_back({{capital}, newQueue()});
+
+		for (int current : adjacent(graph, capital))
+		{
+			enqueue(countries[i].toAdd, edgeLength(graph, capital, current), current);
+		}
 	}
 
 	input.close();
@@ -55,43 +59,33 @@ std::vector<Country> fileReading(Graph *graph)
 	return countries;
 }
 
-void findClosest(Graph *graph, const int city, int &minLength, int &closestCity)
+void addCity(Graph *graph, std::vector<int> &cities, PriorityQueue *toAdd)
 {
-	for (int current : adjacent(graph, city))
+	bool result = true;
+	int closestCity = dequeue(toAdd, result);
+
+	while (belongs(graph, closestCity) && result)
 	{
-		const int distance = edgeLength(graph, city, current);
-		if ((distance < minLength) && (!belongs(graph, current)))
-		{
-			minLength = edgeLength(graph, city, current);
-			closestCity = current;
-		}
-	}
-}
+		closestCity = dequeue(toAdd, result);
+	}	
 
-bool addCity(Graph *graph, std::vector<int> &cities)
-{
-	int minLength = std::numeric_limits<int>::max();
-	int closestCity = -1;
-
-	for (int currentCity : cities)
-	{
-		findClosest(graph, currentCity, minLength, closestCity);
-	}
-
-	if (closestCity >= 0)
+	if (result)
 	{
 		assign(graph, closestCity);
 		cities.push_back(closestCity);
-	}
 
-	return (closestCity < 0);
+		for (int current : adjacent(graph, closestCity))
+		{
+			enqueue(toAdd, edgeLength(graph, closestCity, current), current);
+		}
+	}
 }
 
 bool incompleteExist(std::vector<Country> &countries)
 {
 	for (Country current : countries)
 	{
-		if (!current.isComplete)
+		if (!isEmpty(current.toAdd))
 		{
 			return true;
 		}
@@ -120,9 +114,9 @@ int main()
 	{
 		for (Country &current : countries)
 		{
-			if (!current.isComplete)
+			if (!isEmpty(current.toAdd))
 			{
-				current.isComplete = addCity(graph, current.cities);
+				addCity(graph, current.cities, current.toAdd);
 			}
 		}
 	}
@@ -141,6 +135,12 @@ int main()
 		std::cout << std::endl;
 	}
 
+	for (Country current : countries)
+	{
+		deleteQueue(current.toAdd);
+	}
+
 	delete graph;
+
 	return 0;
 }
