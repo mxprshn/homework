@@ -119,10 +119,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="stringSearch.cpp" />
+    <ClCompile Include="tests.cpp" />
+    <ClCompile Include="textSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stringSearch.h" />
+    <ClInclude Include="tests.h" />
+    <ClInclude Include="textSearch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
