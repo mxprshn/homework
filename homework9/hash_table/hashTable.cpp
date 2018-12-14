@@ -1,7 +1,8 @@
+#include "hashTable.h"
+#include "list.h"
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "list.h"
 
 struct HashTable
 {
@@ -82,12 +83,12 @@ void expand(HashTable *hashTable)
 {
 	hashTable->buckets.resize(hashTable->buckets.size() * 2);
 
-	for (int i = hashTable->buckets.size() / 2; i < hashTable->buckets.size(); ++i)
+	for (size_t i = hashTable->buckets.size() / 2; i < hashTable->buckets.size(); ++i)
 	{
 		hashTable->buckets[i] = createList();
 	}
 
-	for (int i = 0; i < (hashTable->buckets.size() / 2); ++i)
+	for (size_t i = 0; i < (hashTable->buckets.size() / 2); ++i)
 	{
 		Node *current = head(hashTable->buckets[i]);
 
