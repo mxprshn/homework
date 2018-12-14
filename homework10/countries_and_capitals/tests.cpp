@@ -16,7 +16,7 @@ bool programTest()
 		{
 			if (isAdjacent(testGraph, i * 10, j * 10) || !belongs(testGraph, i * 10))
 			{
-				delete testGraph;
+				deleteGraph(testGraph);
 				return false;
 			}
 		}
@@ -36,7 +36,7 @@ bool programTest()
 		{
 			if (edgeLength(testGraph, i * 10, j * 10) != i + j)
 			{
-				delete testGraph;
+				deleteGraph(testGraph);
 				return false;
 			}
 		}
@@ -48,12 +48,12 @@ bool programTest()
 		{
 			if ((j == i * 10) || (j > 100))
 			{
-				delete testGraph;
+				deleteGraph(testGraph);
 				return false;
 			}
 		}
 	}
 
-	delete testGraph;
+	deleteGraph(testGraph);
 	return true;
 }

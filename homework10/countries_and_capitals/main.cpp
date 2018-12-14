@@ -123,7 +123,7 @@ int main()
 
 	std::cout << std::endl;
 
-	for (int i = 0; i < countries.size(); ++i)
+	for (size_t i = 0; i < countries.size(); ++i)
 	{
 		std::cout << "Country: " << i + 1 << " | Cities: ";
 
@@ -140,7 +140,7 @@ int main()
 		deleteQueue(current.toAdd);
 	}
 
-	delete graph;
+	deleteGraph(graph);
 
 	return 0;
 }

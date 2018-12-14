@@ -26,3 +26,5 @@ void assign(Graph *graph, const int vertex);
 
 //get length of an edge
 int edgeLength(Graph *graph, const int vertexA, const int vertexB);
+
+void deleteGraph(Graph *&graph);

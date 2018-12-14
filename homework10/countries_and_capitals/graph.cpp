@@ -109,3 +109,9 @@ int edgeLength(Graph *graph, const int vertexA, const int vertexB)
 
 	return graph->edges[graph->vertices[vertexA].index][graph->vertices[vertexB].index];
 }
+
+void deleteGraph(Graph *&graph)
+{
+	delete graph;
+	graph = nullptr;
+}
