@@ -30,7 +30,7 @@ bool programTest()
 		return false;
 	}
 
-	for (int i = 0; i < testString.length() - 2; ++i)
+	for (size_t i = 0; i < testString.length() - 2; ++i)
 	{
 		if (textSearch(testFileIn, testString.substr(i, 3)) != i)
 		{
