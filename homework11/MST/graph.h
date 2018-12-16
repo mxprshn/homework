@@ -1,25 +1,30 @@
 #pragma once
-#include <vector>
+#include<vector>
 
 struct Graph;
 
-//returns pointer to the new graph
+//create new graph and get pointer to it
 Graph *newGraph();
 
-//checks a vertex for existence in the graph
-bool exists(Graph *graph, const unsigned int vertex);
+//add a vertex to the graph
+void addVertex(Graph *graph, const int vertex);
 
-//adds a new edge between vertexA and vertexB to the graph
-void addEdge(Graph *graph, const unsigned int vertexA, const unsigned int vertexB, const int length);
+//check a vertex for existence in the graph
+bool exists(Graph *graph, const int vertex);
 
-//returns the length of edge between vertexA and vertexB
-int length(Graph *graph, const unsigned int vertexA, const unsigned int vertexB);
+//add an edge between two vertices of the graph
+void addEdge(Graph *graph, const int vertexA, const int vertexB, const int newLength);
 
-//returns vector of adjacent vertices
-std::vector<int> adjacent(Graph *graph, const unsigned int vertex);
+//get vector of adjacent vertices
+std::vector<int> adjacent(Graph *graph, const int vertex);
 
-//checks if one vertex is adjacent to another
-bool isAdjacent(Graph *graph, const unsigned int vertexA, const unsigned int vertexB);
+//check if one vertex is adjacent to another
+bool isAdjacent(Graph *graph, const int vertexA, const int vertexB);
 
-//deletes the graph completely
+//get length of an edge
+int edgeLength(Graph *graph, const int vertexA, const int vertexB);
+
+//delete graph completely
 void deleteGraph(Graph *&graph);
+
+void printGraph(Graph *graph);

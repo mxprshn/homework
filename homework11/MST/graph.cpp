@@ -1,10 +1,12 @@
-#include "graph.h"
 #include <vector>
-#include <algorithm>
+#include <unordered_map>
+#include <iostream>
+#include <iomanip>
 
 struct Graph
 {
 	std::vector<std::vector<int>> edges;
+	std::unordered_map<int, size_t> vertices;
 };
 
 Graph *newGraph()
@@ -12,65 +14,108 @@ Graph *newGraph()
 	return new Graph;
 }
 
-bool exists(Graph *graph, const unsigned int vertex)
+bool exists(Graph *graph, const int vertex)
 {
-	return vertex > graph->edges.size();
+	return graph->vertices.count(vertex) != 0;
 }
 
-void addEdge(Graph *graph, const unsigned int vertexA, const unsigned int vertexB, const int length)
+void addVertex(Graph *graph, const int vertex)
 {
-	const unsigned int maxVertex = std::max(vertexA, vertexB);
+	graph->vertices.insert({vertex, graph->vertices.size()});
+	graph->edges.resize(graph->vertices.size());
 
-	if (maxVertex >= graph->edges.size())
+	for (size_t i = 0; i < graph->vertices.size(); ++i)
 	{
-		graph->edges.resize(maxVertex + 1);
+		graph->edges[i].resize(graph->vertices.size(), 0);
+	}
+}
 
-		for (size_t i = 0; i < graph->edges.size(); ++i)
+void addEdge(Graph *graph, const int vertexA, const int vertexB, const int newLength)
+{
+	if (!exists(graph, vertexA))
+	{
+		addVertex(graph, vertexA);
+	}
+
+	if (!exists(graph, vertexB))
+	{
+		addVertex(graph, vertexB);
+	}
+
+	graph->edges[graph->vertices[vertexA]][graph->vertices[vertexB]] = newLength;
+	graph->edges[graph->vertices[vertexB]][graph->vertices[vertexA]] = newLength;
+}
+
+std::vector<int> adjacent(Graph *graph, const int vertex)
+{
+	std::vector<int> adjacentNodes;
+
+	if (graph->vertices.count(vertex) == 0)
+	{
+		return adjacentNodes;
+	}
+
+	for (size_t i = 0; i < graph->edges.size(); ++i)
+	{
+		if (graph->edges[graph->vertices[vertex]][i] != 0)
 		{
-			graph->edges[i].resize(maxVertex + 1, 0);
+			adjacentNodes.push_back(i);
 		}
 	}
 
-	graph->edges[vertexA][vertexB] = length;
+	return adjacentNodes;
 }
 
-int length(Graph *graph, const unsigned int vertexA, const unsigned int vertexB)
+int edgeLength(Graph *graph, const int vertexA, const int vertexB)
 {
 	if ((!exists(graph, vertexA)) || (!exists(graph, vertexB)))
 	{
 		return -1;
 	}
 
-	return graph->edges[vertexA][vertexB];
+	return graph->edges[graph->vertices[vertexA]][graph->vertices[vertexB]];
 }
 
-std::vector<int> adjacent(Graph *graph, const unsigned int vertex)
+bool isAdjacent(Graph *graph, const int vertexA, const int vertexB)
 {
-	std::vector<int> result;
-
-	if (!exists(graph, vertex))
-	{
-		return result;
-	}
-
-	for (size_t i = 0; i < graph->edges[vertex].size(); ++i)
-	{
-		if (graph->edges[vertex][i] > 0)
-		{
-			result.push_back(i);
-		}
-	}
-
-	return result;
-}
-
-bool isAdjacent(Graph *graph, const unsigned int vertexA, const unsigned int vertexB)
-{
-	return graph->edges[vertexA][vertexB] != 0;
+	return edgeLength(graph, vertexA, vertexB) > 0;
 }
 
 void deleteGraph(Graph *&graph)
 {
 	delete graph;
 	graph = nullptr;
+}
+
+void printGraph(Graph *graph)
+{
+	std::cout << std::setw(5) << std::left << ' ';
+
+	for (std::pair<int, size_t> current : graph->vertices)
+	{
+		std::cout << std::setw(3) << std::left << current.first;
+	}
+
+	std::cout << std::endl;
+	std::cout << std::setw(5) << ' ';
+
+	for (size_t i = 0; i < graph->vertices.size(); ++i)
+	{
+		std::cout << std::setw(3) << std::setfill('_') << '_';
+	}
+
+	std::cout << std::endl << std::setfill(' ');
+
+	for (std::pair<int, size_t> current : graph->vertices)
+	{
+		std::cout << std::setw(4) << current.first;
+		std::cout << '|';
+
+		for (int i : graph->edges[current.second])
+		{
+			std::cout << std::setw(3) << i;
+		}
+		std::cout << std::left;
+		std::cout << std::endl;
+	}
 }

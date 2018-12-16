@@ -7,7 +7,7 @@ struct PriorityQueue;
 PriorityQueue *newQueue();
 
 //adds a new element to the queue (newElement.first = key, newElement.second = value)
-void enqueue(PriorityQueue *queue, const std::pair<int, int> &newElement);
+void enqueue(PriorityQueue *queue, const int, const std::pair<int, int> &newElement);
 
 //returns the minimum element in the queue and removes it
 std::pair<int, int> dequeue(PriorityQueue *queue);
