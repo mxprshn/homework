@@ -1,6 +1,5 @@
 #include "priorityQueue.h"
 #include <vector>
-#include <algorithm>
 
 struct QueueElement
 {

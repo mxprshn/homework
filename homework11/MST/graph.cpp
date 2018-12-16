@@ -89,33 +89,25 @@ void deleteGraph(Graph *&graph)
 
 void printGraph(Graph *graph)
 {
-	std::cout << std::setw(5) << std::left << ' ';
+	std::cout << std::setw(3) << std::setfill('_') << std::right << '|';
 
 	for (std::pair<int, size_t> current : graph->vertices)
 	{
-		std::cout << std::setw(3) << std::left << current.first;
+		std::cout << std::setw(3) << std::setfill('_') << std::left << current.first;
 	}
 
-	std::cout << std::endl;
-	std::cout << std::setw(5) << ' ';
-
-	for (size_t i = 0; i < graph->vertices.size(); ++i)
-	{
-		std::cout << std::setw(3) << std::setfill('_') << '_';
-	}
-
-	std::cout << std::endl << std::setfill(' ');
+	std::cout << std::setfill(' ') << std::endl;
 
 	for (std::pair<int, size_t> current : graph->vertices)
 	{
-		std::cout << std::setw(4) << current.first;
+		std::cout << std::setw(2) << current.first;
 		std::cout << '|';
 
 		for (int i : graph->edges[current.second])
 		{
 			std::cout << std::setw(3) << i;
 		}
-		std::cout << std::left;
+
 		std::cout << std::endl;
 	}
 }

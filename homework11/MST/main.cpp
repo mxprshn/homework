@@ -1,5 +1,6 @@
 #include "priorityQueue.h"
 #include "graph.h"
+#include "programTest.h"
 #include <fstream>
 #include <vector>
 #include <iostream>
@@ -56,17 +57,48 @@ Graph *findMST(Graph *graph, const unsigned int startVertex)
 		}
 	}
 
+	deleteQueue(edgesQueue);
 	return result;
 }
 
 int main()
 {
+	if (!programTest())
+	{
+		std::cout << "Test failed." << std::endl;
+		return 1;
+	}
+
 	std::ifstream input("input.txt", std::ios::in);
 
+	if (!input.is_open())
+	{
+		return 1;
+	}
+
 	Graph *graph = newGraph();
-	fileReading(input, graph);
+
+	if (!fileReading(input, graph))
+	{
+		deleteGraph(graph);
+		return 1;
+	}
+
+	std::cout << "Enter the start vertex for MST finding: ";
+
+	unsigned int startVertex = 0;
+	std::cin >> startVertex;
+
+	Graph *spanningTree = findMST(graph, startVertex);
+
+	std::cout << std::endl << "Input graph: " << std::endl;
 	printGraph(graph);
-	std::cout << std::endl;
-	printGraph(findMST(graph, 0));
+
+	std::cout << std::endl << "Minimum spanning tree: " << std::endl;
+	printGraph(spanningTree);
+	
+	deleteGraph(graph);
+	deleteGraph(spanningTree);
+
 	return 0;
 }
