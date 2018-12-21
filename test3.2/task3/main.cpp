@@ -65,6 +65,7 @@ int main()
 	}
 
 	deleteGraph(graph);
+	input.close();
 
 	return 0;
 }
