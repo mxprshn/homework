@@ -30,7 +30,7 @@ void enqueue(PriorityQueue *queue, const int newKey, const int newValue)
 		Node *leftNode = nullptr;
 		Node *rightNode = queue->maximum;
 
-		while (rightNode != nullptr && newElement->key < rightNode->key)
+		while (rightNode != nullptr && newElement->key <= rightNode->key)
 		{
 			leftNode = rightNode;
 			rightNode = rightNode->next;
