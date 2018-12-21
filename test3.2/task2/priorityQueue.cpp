@@ -14,7 +14,7 @@ PriorityQueue *newQueue()
 
 void upHeap(PriorityQueue *queue, size_t position)
 {
-	while ((position != 0) && (queue->elements[position].first > queue->elements[(position - 1) / 2].first))
+	while ((position != 0) && (queue->elements[position].first >= queue->elements[(position - 1) / 2].first))
 	{
 		swap(queue->elements[position], queue->elements[(position - 1) / 2]);
 		position = (position - 1) / 2;
@@ -39,11 +39,23 @@ void downHeap(PriorityQueue *queue, size_t position)
 		swap(queue->elements[maxChild], queue->elements[position]);
 		position = maxChild;
 	}
+
+	if (position + 1 < queue->elements.size() && (queue->elements[position].first == queue->elements[position + 1].first))
+	{
+		swap(queue->elements[position], queue->elements[position + 1]);
+	}
 }
 
 void enqueue(PriorityQueue *queue, const int key, const int value)
 {
 	std::pair<int, int> newElement = {key, value};
+
+	//if (!isEmpty(queue) && key == queue->elements[0].first)
+	//{
+	//	queue->elements.insert(queue->elements.begin(), newElement);
+	//	return;
+	//}
+
 	queue->elements.push_back(newElement);
 	upHeap(queue, queue->elements.size() - 1);
 }
